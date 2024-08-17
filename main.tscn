@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://q5so6d1cjxcx"]
+
+[ext_resource type="PackedScene" uid="uid://dqt37wgynim3e" path="res://entities/necromancer/necromancer.tscn" id="1_6kf73"]
+[ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_nt7cx"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Necromancer" parent="." instance=ExtResource("1_6kf73")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Skeleton" parent="." instance=ExtResource("2_nt7cx")]
+position = Vector2(-22, 0)

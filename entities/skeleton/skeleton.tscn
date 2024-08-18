@@ -1,37 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5qwjq47iqbkj"]
+[gd_scene load_steps=28 format=3 uid="uid://b5qwjq47iqbkj"]
 
 [ext_resource type="Texture2D" uid="uid://dqrtvy7jeb0ko" path="res://entities/skeleton/Skeleton.png" id="1_psw8w"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="1_v25s7"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jc24m"]
-load_path = "res://.godot/imported/Skeleton.png-591c0962f90c3c7ae64eba5f19a70e76.ctex"
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlbpa"]
-radius = 6.0
-height = 28.0
-
-[sub_resource type="Animation" id="Animation_odymd"]
-resource_name = "unarmed-idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[ext_resource type="Script" path="res://entities/skeleton/skeleton.gd" id="1_xyc37"]
+[ext_resource type="Script" path="res://entities/skeleton/skeleton_animations.gd" id="3_27074"]
+[ext_resource type="PackedScene" uid="uid://bitw7wbqakumy" path="res://components/hurtbox_component.tscn" id="3_acviw"]
+[ext_resource type="Shader" path="res://entities/skeleton/outline.gdshader" id="4_35gw5"]
+[ext_resource type="Script" path="res://entities/skeleton/states/skeleton_hsm.gd" id="6_n2on0"]
+[ext_resource type="Script" path="res://entities/skeleton/states/idle_state.gd" id="7_n2p64"]
 
 [sub_resource type="Animation" id="Animation_ij8g1"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
+tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,76 +22,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_j1aub"]
-resource_name = "unarmed-action"
-length = 0.2
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_yqlbj"]
-resource_name = "sword-idle"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
-[sub_resource type="Animation" id="Animation_gr130"]
-resource_name = "sword-action"
-length = 0.2
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_udk8u"]
-resource_name = "bow-action"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_tuhhj"]
@@ -119,7 +32,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
+tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -129,21 +42,21 @@ tracks/0/keys = {
 "values": [7, 8]
 }
 
-[sub_resource type="Animation" id="Animation_rsntw"]
-resource_name = "hammer-idle"
+[sub_resource type="Animation" id="Animation_udk8u"]
+resource_name = "bow-action"
 length = 0.1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
+tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [9]
+"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_juxal"]
@@ -154,7 +67,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Torso:frame")
+tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -162,6 +75,92 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_rsntw"]
+resource_name = "hammer-idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_gr130"]
+resource_name = "sword-action"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_yqlbj"]
+resource_name = "sword-idle"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_j1aub"]
+resource_name = "unarmed-action"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_odymd"]
+resource_name = "unarmed-idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vl0wn"]
@@ -177,14 +176,12 @@ _data = {
 "unarmed-idle": SubResource("Animation_odymd")
 }
 
-[sub_resource type="Animation" id="Animation_2xfbn"]
-resource_name = "idle"
-length = 0.1
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_2somk"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Legs:frame")
+tracks/0/path = NodePath("Sprites/Legs:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -194,12 +191,14 @@ tracks/0/keys = {
 "values": [12]
 }
 
-[sub_resource type="Animation" id="Animation_2somk"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_2xfbn"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Legs:frame")
+tracks/0/path = NodePath("Sprites/Legs:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -216,7 +215,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Legs:frame")
+tracks/0/path = NodePath("Sprites/Legs:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -230,35 +229,97 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_2somk"),
 "idle": SubResource("Animation_2xfbn"),
-"walking": SubResource("Animation_eloir")
+"walk": SubResource("Animation_eloir")
 }
 
-[node name="Skeleton" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3jhkm"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlbpa"]
+radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iln1u"]
+resource_local_to_scene = true
+shader = ExtResource("4_35gw5")
+shader_parameter/enabled = false
+shader_parameter/color = Color(0.675822, 0.491121, 0.775498, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jc24m"]
+load_path = "res://.godot/imported/Skeleton.png-591c0962f90c3c7ae64eba5f19a70e76.ctex"
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_712d1"]
+
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animator")]
+y_sort_enabled = true
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_xyc37")
+sprite = NodePath("Sprites")
+animator = NodePath("Animators/LegAnimator")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_v25s7")]
 max_health = 10.0
 
-[node name="Torso" type="Sprite2D" parent="."]
+[node name="Animators" type="Node" parent="."]
+script = ExtResource("3_27074")
+
+[node name="TorsoAnimator" type="AnimationPlayer" parent="Animators"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_vl0wn")
+}
+
+[node name="LegAnimator" type="AnimationPlayer" parent="Animators"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_u61nq")
+}
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_acviw")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_3jhkm")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vlbpa")
+
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_iln1u")
+position = Vector2(1, 0)
+
+[node name="Torso" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 texture = ExtResource("1_psw8w")
 hframes = 5
 vframes = 5
 
-[node name="Legs" type="Sprite2D" parent="."]
+[node name="Legs" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 texture = SubResource("CompressedTexture2D_jc24m")
 hframes = 5
 vframes = 5
 frame = 12
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
-shape = SubResource("CapsuleShape2D_vlbpa")
+[node name="SkeletonHSM" type="LimboHSM" parent="." node_paths=PackedStringArray("idle_state", "move_state", "action_state")]
+blackboard_plan = SubResource("BlackboardPlan_712d1")
+script = ExtResource("6_n2on0")
+idle_state = NodePath("IdleState")
+move_state = NodePath("MoveState")
+action_state = NodePath("ActionState")
 
-[node name="TorsoAnimator" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vl0wn")
-}
+[node name="IdleState" type="LimboState" parent="SkeletonHSM"]
+script = ExtResource("7_n2p64")
 
-[node name="LegAnimator" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_u61nq")
-}
+[node name="MoveState" type="LimboState" parent="SkeletonHSM"]
+
+[node name="ActionState" type="LimboHSM" parent="SkeletonHSM"]
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 5.0

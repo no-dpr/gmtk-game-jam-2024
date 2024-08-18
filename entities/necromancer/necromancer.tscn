@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqt37wgynim3e"]
 
-[ext_resource type="Texture2D" path="res://icon.svg" id="1_opm1v"]
+[ext_resource type="Texture2D" uid="uid://cyi7qnfplf5sp" path="res://icon.svg" id="1_opm1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qol22"]
 
 [node name="Necromancer" type="CharacterBody2D"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qol22")

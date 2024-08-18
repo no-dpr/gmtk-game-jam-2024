@@ -38,19 +38,25 @@ var _has_died := false
 func _ready() -> void:
 	_initialize_health.call_deferred()
 	
-func damage(amount : float):
+func damage(amount : float) -> void:
 	current_health -= amount
 	
-func heal(amount : float):
+func heal(amount : float) -> void:
 	current_health += amount
 	
-func set_max_health(health : float):
+func set_max_health(health : float) -> void:
 	max_health = health
 	
 func _initialize_health() -> void:
 	current_health = max_health
 
 class HealthUpdate extends RefCounted:
+	var previous_health : float
+	var current_health : float
+	var max_health : float
+	var health_percent : float
+	var is_heal : bool
+	
 	func _init(previous_health : float, current_health : float, max_health : float) -> void:
 		self.previous_health = previous_health
 		self.current_health = current_health

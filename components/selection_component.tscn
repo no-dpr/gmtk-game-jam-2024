@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc0qvbu71rgwg"]
+
+[ext_resource type="Script" path="res://components/selection_component.gd" id="1_v5wm3"]
+
+[node name="SelectionComponent" type="Area2D"]
+script = ExtResource("1_v5wm3")

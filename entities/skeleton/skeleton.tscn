@@ -1,13 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://b5qwjq47iqbkj"]
+[gd_scene load_steps=31 format=3 uid="uid://b5qwjq47iqbkj"]
 
 [ext_resource type="Texture2D" uid="uid://dqrtvy7jeb0ko" path="res://entities/skeleton/Skeleton.png" id="1_psw8w"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="1_v25s7"]
 [ext_resource type="Script" path="res://entities/skeleton/skeleton.gd" id="1_xyc37"]
 [ext_resource type="Script" path="res://entities/skeleton/skeleton_animations.gd" id="3_27074"]
 [ext_resource type="PackedScene" uid="uid://bitw7wbqakumy" path="res://components/hurtbox_component.tscn" id="3_acviw"]
+[ext_resource type="PackedScene" uid="uid://cc0qvbu71rgwg" path="res://components/selection_component.tscn" id="4_0pqhb"]
 [ext_resource type="Shader" path="res://entities/skeleton/outline.gdshader" id="4_35gw5"]
 [ext_resource type="Script" path="res://entities/skeleton/states/skeleton_hsm.gd" id="6_n2on0"]
 [ext_resource type="Script" path="res://entities/skeleton/states/idle_state.gd" id="7_n2p64"]
+[ext_resource type="Script" path="res://entities/skeleton/states/move_state.gd" id="9_itqwi"]
 
 [sub_resource type="Animation" id="Animation_ij8g1"]
 length = 0.001
@@ -232,12 +234,16 @@ _data = {
 "walk": SubResource("Animation_eloir")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dnas7"]
+radius = 8.0
+height = 32.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3jhkm"]
 radius = 5.0
 height = 26.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlbpa"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4jwc"]
+size = Vector2(10, 4)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iln1u"]
 resource_local_to_scene = true
@@ -253,20 +259,26 @@ shader_parameter/add_margins = true
 load_path = "res://.godot/imported/Skeleton.png-591c0962f90c3c7ae64eba5f19a70e76.ctex"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_712d1"]
+var/tool/name = &"tool"
+var/tool/type = 21
+var/tool/value = &"hammer"
+var/tool/hint = 2
+var/tool/hint_string = "unarmed,sword,bow,hammer"
 
-[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animator")]
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 y_sort_enabled = true
 collision_layer = 2
 input_pickable = true
 script = ExtResource("1_xyc37")
 sprite = NodePath("Sprites")
-animator = NodePath("Animators/LegAnimator")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_v25s7")]
 max_health = 10.0
 
-[node name="Animators" type="Node" parent="."]
+[node name="Animators" type="Node" parent="." node_paths=PackedStringArray("torso_animator", "legs_animator")]
 script = ExtResource("3_27074")
+torso_animator = NodePath("TorsoAnimator")
+legs_animator = NodePath("LegAnimator")
 
 [node name="TorsoAnimator" type="AnimationPlayer" parent="Animators"]
 root_node = NodePath("../..")
@@ -280,6 +292,12 @@ libraries = {
 "": SubResource("AnimationLibrary_u61nq")
 }
 
+[node name="SelectionComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_0pqhb")]
+actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
+shape = SubResource("CapsuleShape2D_dnas7")
+
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_acviw")]
 health_component = NodePath("../HealthComponent")
 
@@ -287,7 +305,8 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CapsuleShape2D_3jhkm")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_vlbpa")
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_a4jwc")
 
 [node name="Sprites" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_iln1u")
@@ -313,12 +332,15 @@ idle_state = NodePath("IdleState")
 move_state = NodePath("MoveState")
 action_state = NodePath("ActionState")
 
-[node name="IdleState" type="LimboState" parent="SkeletonHSM"]
+[node name="IdleState" type="LimboState" parent="SkeletonHSM" node_paths=PackedStringArray("animators")]
 script = ExtResource("7_n2p64")
+animators = NodePath("../../Animators")
 
-[node name="MoveState" type="LimboState" parent="SkeletonHSM"]
+[node name="MoveState" type="LimboState" parent="SkeletonHSM" node_paths=PackedStringArray("animators")]
+script = ExtResource("9_itqwi")
+animators = NodePath("../../Animators")
 
-[node name="ActionState" type="LimboHSM" parent="SkeletonHSM"]
+[node name="ActionState" type="LimboState" parent="SkeletonHSM"]
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

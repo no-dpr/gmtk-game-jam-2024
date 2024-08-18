@@ -11,9 +11,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			if selected.size() > 0: 
-				for entity : EvilGuy in selected:
-					entity.target_pos = get_global_mouse_position()
-					entity.selected = false
+				for item : SelectionComponent in selected:
+					item.actor.target_pos = get_global_mouse_position()
+					item.actor.selected = false
 				selected = []
 				return
 				
@@ -34,13 +34,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			query.shape = select_rect
 			query.transform = Transform2D(0, select_start)
+			query.collide_with_areas = true
+			query.collide_with_bodies = false
 			
 			selected = space.intersect_shape(query) \
 				.map(func (item : Dictionary) -> Object: return item.collider) \
-				.filter(func (object : Object) -> bool: return object is EvilGuy)
+				.filter(func (object : Object) -> bool: return object is SelectionComponent)
 				
-			for entity : EvilGuy in selected:
-				entity.selected = true
+			for item : SelectionComponent in selected:
+				item.actor.selected = true
 			
 	elif event is InputEventMouseMotion and dragging:
 		queue_redraw()

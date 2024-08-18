@@ -1,15 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqt37wgynim3e"]
+[gd_scene load_steps=8 format=3 uid="uid://dqt37wgynim3e"]
 
+[ext_resource type="Script" path="res://entities/skeleton/skeleton.gd" id="1_68rot"]
 [ext_resource type="Texture2D" uid="uid://cyi7qnfplf5sp" path="res://icon.svg" id="1_opm1v"]
+[ext_resource type="Shader" path="res://entities/skeleton/outline.gdshader" id="2_i6yr8"]
+[ext_resource type="PackedScene" uid="uid://cc0qvbu71rgwg" path="res://components/selection_component.tscn" id="3_hi220"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qol22"]
 
-[node name="Necromancer" type="CharacterBody2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dm6f5"]
+shader = ExtResource("2_i6yr8")
+shader_parameter/enabled = true
+shader_parameter/color = Color(0.727037, 0.308586, 1, 1)
+shader_parameter/width = 10.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itaat"]
+
+[node name="Necromancer" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 2
+script = ExtResource("1_68rot")
+sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qol22")
 
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 20.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dm6f5")
 scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("1_opm1v")
+
+[node name="SelectionComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_hi220")]
+actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
+shape = SubResource("RectangleShape2D_itaat")

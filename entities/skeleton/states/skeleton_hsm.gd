@@ -13,5 +13,8 @@ func _ready() -> void:
 	add_transition(ANYSTATE, action_state, ACTION_STARTED)
 	add_transition(move_state, idle_state, move_state.EVENT_FINISHED)
 	add_transition(action_state, idle_state, action_state.EVENT_FINISHED)
-	initialize(agent)
+	initial_state = idle_state
+	
+	initialize(owner)
+	set_active(true)
 	

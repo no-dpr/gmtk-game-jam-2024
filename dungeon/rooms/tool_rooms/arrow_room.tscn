@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=4 uid="uid://cw5r8hdtkjnok"]
+
+[ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_t4qe7"]
+
+[node name="ArrowRoom" type="Node2D"]
+
+[node name="Floor" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAACAAEAAAACAAQAAAACAAAAAAAGAAEAAAACAP//AAAGAAEAAAACAP7/AAACAAMAAAABAAEAAAAFAAYAAAABAAAAAAACAAAAAAABAP//AAACAAAAAAABAP7/AAAEAAEAAAAAAAEAAAACAAYAAAAAAAAAAAADAAEAAAAAAP//AAACAAAAAAAAAP7/AAAEAAcAAAD//wEAAAAEAAYAAAD//wAAAAADAAEAAAD/////AAACAAAAAAD///7/AAAFAAcAAAD+/wEAAAABAAQAAAD+/wAAAAABAAYAAAD+////AAABAAYAAAD+//7/AAAFAAMAAAA=")
+tile_set = ExtResource("1_t4qe7")
+
+[node name="Decoration" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAAAAAgAAAAAAAgD///7/AgAAAAAABgA=")
+tile_set = ExtResource("1_t4qe7")

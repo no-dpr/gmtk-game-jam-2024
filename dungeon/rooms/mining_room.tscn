@@ -1,13 +1,22 @@
-[gd_scene load_steps=2 format=4 uid="uid://dlpfshdsqo161"]
+[gd_scene load_steps=4 format=4 uid="uid://dlpfshdsqo161"]
 
 [ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_1fnvs"]
+[ext_resource type="Script" path="res://dungeon/rooms/build_room.gd" id="1_7du31"]
+[ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/short_hallway.tscn" id="2_2ervf"]
 
-[node name="MiningRoom" type="Node2D"]
+[node name="MiningRoom" type="Node2D" node_paths=PackedStringArray("floor_tile_map_layer")]
+script = ExtResource("1_7du31")
+floor_tile_map_layer = NodePath("Floor")
+hallway_scene = ExtResource("2_2ervf")
+bottom_left_from_center = Vector2i(-4, 2)
+bottom_right_from_center = Vector2i(3, 2)
+top_left_from_center = Vector2i(-4, -2)
+top_right_from_center = Vector2i(3, -2)
 
 [node name="Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAADAAAAAAAEAAUAAAADAP//AAAGAAEAAAADAP7/AAACAAMAAAACAAAAAAADAAAAAAACAP//AAACAAAAAAACAP7/AAAHAAUAAAABAAAAAAADAAAAAAABAP//AAADAAEAAAABAP7/AAAEAAEAAAAAAAAAAAADAAEAAAAAAP//AAACAAAAAAAAAP7/AAAAAAcAAAD//wAAAAACAAAAAAD/////AAADAAAAAAD///7/AAAAAAcAAAD+/wAAAAADAAAAAAD+////AAACAAEAAAD+//7/AAAFAAEAAAD9/wAAAAADAAAAAAD9////AAADAAEAAAD9//7/AAAAAAcAAAADAAIAAAACAAQAAAADAAEAAAAEAAUAAAACAAIAAAACAAYAAAACAAEAAAACAAEAAAABAAIAAAAEAAYAAAABAAEAAAADAAAAAAAAAAIAAAAHAAIAAAAAAAEAAAACAAAAAAD//wIAAAAEAAYAAAD//wEAAAADAAEAAAD+/wIAAAAHAAIAAAD+/wEAAAADAAEAAAD9/wIAAAAHAAIAAAD9/wEAAAADAAAAAAD8/wIAAAABAAQAAAD8/wEAAAABAAIAAAD8/wAAAAADAAcAAAD8////AAABAAIAAAD8//7/AAAFAAMAAAA=")
 tile_set = ExtResource("1_1fnvs")
 
 [node name="Decoration" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAP7/AgAAAAAAAQD+//7/AgAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAAAAP7/AgAAAAAAAQD+//7/AQAFAAMAAAA=")
 tile_set = ExtResource("1_1fnvs")

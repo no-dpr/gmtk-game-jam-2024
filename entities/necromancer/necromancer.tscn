@@ -28,7 +28,6 @@ shape = SubResource("RectangleShape2D_qol22")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-radius = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_dm6f5")

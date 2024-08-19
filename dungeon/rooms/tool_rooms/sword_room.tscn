@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=4 uid="uid://syrpk5m2x5s3"]
+
+[ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_muin2"]
+
+[node name="SwordRoom" type="Node2D"]
+
+[node name="Floor" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAAEAAAACAAQAAAABAAAAAAAEAAUAAAABAP//AAAGAAQAAAABAP7/AAAGAAQAAAABAP3/AAACAAMAAAAAAAEAAAAHAAIAAAAAAAAAAAACAAEAAAAAAP//AAACAAAAAAAAAP7/AAACAAAAAAAAAP3/AAAEAAEAAAD//wEAAAAFAAQAAAD//wAAAAACAAAAAAD/////AAACAAEAAAD///7/AAACAAAAAAD///3/AAAFAAcAAAD+/wEAAAABAAQAAAD+/wAAAAABAAIAAAD+////AAABAAMAAAD+//7/AAABAAMAAAD+//3/AAAFAAMAAAA=")
+tile_set = ExtResource("1_muin2")
+
+[node name="Decoration" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAgD///3/AgAAAAAABQA=")
+tile_set = ExtResource("1_muin2")

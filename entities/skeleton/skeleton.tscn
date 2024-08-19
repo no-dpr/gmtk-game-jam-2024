@@ -293,24 +293,25 @@ libraries = {
 }
 
 [node name="SelectionComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_0pqhb")]
+position = Vector2(0, -12)
 actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
 shape = SubResource("CapsuleShape2D_dnas7")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_acviw")]
+position = Vector2(0, -12)
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CapsuleShape2D_3jhkm")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_a4jwc")
 
 [node name="Sprites" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_iln1u")
-position = Vector2(1, 0)
+position = Vector2(1, -12)
 
 [node name="Torso" type="Sprite2D" parent="Sprites"]
 use_parent_material = true

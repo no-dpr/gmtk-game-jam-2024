@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_nt7cx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1js82"]
-vertices = PackedVector2Array(319.508, 174.109, -313.047, 183.867, -265.789, -194.141, 293.469, -207.828)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+vertices = PackedVector2Array(41, 41, -41, 41, -41, -41, 41, -41, 64.8672, 36.5391, 65.0781, 9, 293.469, -207.828, 319.508, 174.109, 65.0312, 55, -65.0781, -55, -64.9609, -39, -65.0781, -39, -64.9609, -23, -65.0781, -23, -64.9609, -7, -65.0781, -7, -64.9609, 9, -65, 9, 25, 65.0781, 41, 64.9609, 41, 65.0938, -313.047, 183.867, 64.9062, 9, 64.8984, 7, 65.0312, 7, 64.8672, -11.4531, 65.0781, -39, 64.9062, -39, 64.8984, -41, 65.0469, -41, 64.8594, -67.9375, -265.789, -194.141, -64.8594, -67.9375, -64.9375, 25, -65.0781, 25, -65.0703, 64.9375, -55, 64.9375, -55, 65.0781, -36.0234, 64.9375, -7, 64.9375, -7, 65.0781, 11.9766, 64.9375, 25, 64.9375, 64.9062, 64.7969, 64.9062, 55, -64.9531, -55, -64.9375, 43.4062)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11), PackedInt32Array(11, 12, 13), PackedInt32Array(13, 14, 15), PackedInt32Array(15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 5), PackedInt32Array(6, 5, 24, 25, 26), PackedInt32Array(27, 28, 29, 26), PackedInt32Array(6, 26, 29, 30), PackedInt32Array(31, 6, 30, 32), PackedInt32Array(21, 31, 32, 9), PackedInt32Array(17, 33, 34), PackedInt32Array(35, 36, 37, 21), PackedInt32Array(38, 39, 40, 21, 37), PackedInt32Array(41, 42, 18, 21, 40), PackedInt32Array(43, 44, 8, 7), PackedInt32Array(43, 7, 21, 20), PackedInt32Array(32, 45, 9), PackedInt32Array(21, 9, 11), PackedInt32Array(21, 11, 13), PackedInt32Array(21, 13, 15), PackedInt32Array(21, 15, 17, 34), PackedInt32Array(35, 21, 34, 46)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-272, -201, -321, 191, 327, 181, 300, -215)])
 agent_radius = 7.0
 
@@ -15,25 +15,28 @@ agent_radius = 7.0
 y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_1js82")
 
-[node name="Bedroom" parent="NavigationRegion2D" instance=ExtResource("1_jl8sb")]
+[node name="Bedroom" parent="NavigationRegion2D" node_paths=PackedStringArray("navigation_region") instance=ExtResource("1_jl8sb")]
+navigation_region = NodePath("..")
 
-[node name="Entities" type="Node2D" parent="NavigationRegion2D"]
+[node name="Entities" type="Node2D" parent="."]
 y_sort_enabled = true
+position = Vector2(20, 0)
 script = ExtResource("1_yalgq")
 
-[node name="Jon" parent="NavigationRegion2D/Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(-22, 0)
+[node name="Jon" parent="Entities" instance=ExtResource("2_nt7cx")]
+position = Vector2(-44, 33)
 
-[node name="John" parent="NavigationRegion2D/Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(-22, 0)
+[node name="John" parent="Entities" instance=ExtResource("2_nt7cx")]
+position = Vector2(7, 1)
 
-[node name="Jhan" parent="NavigationRegion2D/Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(-22, 0)
+[node name="Jhan" parent="Entities" instance=ExtResource("2_nt7cx")]
+position = Vector2(-42, 0)
 
-[node name="Necromancer" parent="NavigationRegion2D/Entities" instance=ExtResource("1_6kf73")]
+[node name="Necromancer" parent="Entities" instance=ExtResource("1_6kf73")]
+position = Vector2(-20, 0)

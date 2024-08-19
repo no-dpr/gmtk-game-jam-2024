@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=4 uid="uid://bni1vmi41o6wd"]
 
-[ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_hnto7"]
-[ext_resource type="Script" path="res://dungeon/rooms/hallway/hallway.gd" id="1_sunko"]
+[ext_resource type="Script" path="res://dungeon/rooms/hallway/horizontal_hallway.gd" id="1_lhyel"]
+[ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="2_y176i"]
 
-[node name="ShortHallway" type="Node2D" node_paths=PackedStringArray("floor_tile_layer")]
-script = ExtResource("1_sunko")
+[node name="HorizontalShortHallway" type="Node2D" node_paths=PackedStringArray("floor_tile_layer")]
+script = ExtResource("1_lhyel")
 bottom_left_from_center = Vector2i(-2, 1)
 bottom_right_from_center = Vector2i(2, 1)
 top_left_from_center = Vector2i(-2, -2)
@@ -14,9 +14,9 @@ floor_tile_layer = NodePath("Floor")
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
 tile_map_data = PackedByteArray("AAACAAEAAAAFAAYAAAACAAAAAAACAAEAAAACAP//AAACAAAAAAABAAEAAAAFAAYAAAABAAAAAAADAAEAAAABAP//AAACAAEAAAABAP7/AAAHAAUAAAAAAAEAAAAHAAIAAAAAAAAAAAACAAEAAAAAAP//AAACAAEAAAAAAP7/AAAFAAcAAAD//wEAAAAHAAIAAAD//wAAAAACAAEAAAD/////AAACAAAAAAD///7/AAAEAAEAAAD+/wEAAAAEAAYAAAD+/wAAAAADAAEAAAD+////AAADAAAAAAD+//7/AAAFAAEAAAACAP7/AAAEAAEAAAA=")
-tile_set = ExtResource("1_hnto7")
+tile_set = ExtResource("2_y176i")
 
 [node name="Decoration" type="TileMapLayer" parent="."]
 z_index = -2
 tile_map_data = PackedByteArray("AAABAAAAAQALAAcAAAABAP//AQALAAYAAAAAAAAAAQAJAAcAAAAAAP//AQAJAAYAAAD/////AQAGAAYAAAD//wAAAQAGAAcAAAA=")
-tile_set = ExtResource("1_hnto7")
+tile_set = ExtResource("2_y176i")

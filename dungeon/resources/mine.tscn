@@ -396,6 +396,7 @@ sources/0 = SubResource("TileSetAtlasSource_j61h7")
 sources/1 = SubResource("TileSetAtlasSource_dnps2")
 
 [node name="Mine" type="Node2D"]
+z_index = -2
 
 [node name="Sprite" type="TileMapLayer" parent="."]
 position = Vector2(8, 8)

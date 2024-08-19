@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=4 uid="uid://dlpfshdsqo161"]
+[gd_scene load_steps=5 format=4 uid="uid://dlpfshdsqo161"]
 
 [ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_1fnvs"]
-[ext_resource type="Script" path="res://dungeon/rooms/build_room.gd" id="1_7du31"]
-[ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/short_hallway.tscn" id="2_2ervf"]
+[ext_resource type="Script" path="res://dungeon/rooms/room.gd" id="1_7du31"]
+[ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/horizontal_short_hallway.tscn" id="2_1y5f2"]
+[ext_resource type="PackedScene" uid="uid://do3dfy4egswh0" path="res://dungeon/rooms/hallway/vertical_short_hallway.tscn" id="3_0l2l5"]
 
 [node name="MiningRoom" type="Node2D" node_paths=PackedStringArray("floor_tile_map_layer")]
 script = ExtResource("1_7du31")
 floor_tile_map_layer = NodePath("Floor")
-hallway_scene = ExtResource("2_2ervf")
+horizontal_hallway_scene = ExtResource("2_1y5f2")
+vertical_hallway_scene = ExtResource("3_0l2l5")
 bottom_left_from_center = Vector2i(-4, 2)
 bottom_right_from_center = Vector2i(3, 2)
 top_left_from_center = Vector2i(-4, -2)

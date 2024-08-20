@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dym8rfm0cwkus"]
+
+[ext_resource type="Script" path="res://components/action_component.gd" id="1_12x2u"]
+
+[node name="ActionComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_12x2u")
+resource = "stone"

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpg21v0fohh1h"]
+
+[ext_resource type="Script" path="res://autoload/navigation_globals.gd" id="1_djibd"]
+
+[node name="NavigationGlobals" type="Node"]
+script = ExtResource("1_djibd")

@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvc0v8i5qg68g"]
+
+[ext_resource type="Theme" uid="uid://bkil8skpq2tu2" path="res://ui/main_theme.tres" id="1_xg5hf"]
+[ext_resource type="Script" path="res://ui/hud.gd" id="2_km27n"]
+
+[node name="HUD" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xg5hf")
+script = ExtResource("2_km27n")
+
+[node name="Resources" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Wood" type="Label" parent="Resources"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+text = "Wood: "
+
+[node name="Stone" type="Label" parent="Resources"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+text = "Stone: "
+
+[node name="Adventurers" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("1_xg5hf")
+text = "0 Left"
+
+[node name="Skeletons" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_xg5hf")
+text = "Skeletons: "
+
+[node name="Tools" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Swords" type="Label" parent="Tools"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+text = "Swords: "
+
+[node name="Hammers" type="Label" parent="Tools"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+text = "Hammers: "
+
+[node name="Phases" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("1_xg5hf")
+
+[node name="PhaseLabel" type="Label" parent="Phases"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+horizontal_alignment = 2
+
+[node name="PhaseTimer" type="Label" parent="Phases"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+horizontal_alignment = 2

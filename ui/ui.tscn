@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6oi2605fgj2"]
+
+[ext_resource type="PackedScene" uid="uid://bvc0v8i5qg68g" path="res://ui/hud.tscn" id="1_igp28"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HUD" parent="." instance=ExtResource("1_igp28")]
+mouse_filter = 2

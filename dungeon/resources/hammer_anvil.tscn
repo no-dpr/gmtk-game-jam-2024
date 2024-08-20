@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xgr1c6centbi"]
+
+[ext_resource type="PackedScene" uid="uid://yyvrer4b676w" path="res://dungeon/resources/anvil.tscn" id="1_xr33y"]
+
+[node name="Anvil" instance=ExtResource("1_xr33y")]
+
+[node name="ActionComponent" parent="." index="2"]
+resource = "hammer"

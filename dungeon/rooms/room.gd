@@ -2,17 +2,22 @@ class_name Room
 extends Node2D
 
 @export var floor_tile_map_layer : TileMapLayer
+@export var decoration_tile_layer : TileMapLayer
 @export var horizontal_hallway_scene : PackedScene
 @export var vertical_hallway_scene : PackedScene
 
-@export var navigation_region : NavigationRegion2D
+@export var flip_h_if_left : bool = false
+@export var flip_v_if_bottom : bool = false
 
+@export_group("Coords")
 @export var bottom_left_from_center: Vector2i
 @export var bottom_right_from_center: Vector2i
 @export var top_left_from_center: Vector2i
 @export var top_right_from_center: Vector2i
 
+@export_group("Misc")
 @export var additional_room_scene : PackedScene
+@export var navigation_region : NavigationRegion2D
 
 func _ready() -> void:
 	y_sort_enabled = true
@@ -21,8 +26,10 @@ func _ready() -> void:
 		
 	if additional_room_scene == null:
 		additional_room_scene = load("res://dungeon/rooms/bedroom.tscn")
-		
+	
 	floor_tile_map_layer.z_index = -4
+	
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT && event.is_pressed():
 		var coords := floor_tile_map_layer.local_to_map(floor_tile_map_layer.get_local_mouse_position())
@@ -53,6 +60,13 @@ func initialize_room_from_horizontal_hallway(
 	
 	for coords : Vector2i in hallway_coords:
 		floor_tile_map_layer.set_cell(coords)
+		
+	if flip_h_if_left and is_left and decoration_tile_layer != null:
+		decoration_tile_layer.scale.x = -1
+	else:
+		decoration_tile_layer.scale.x = 1
+	decoration_tile_layer.scale.y = 1
+	
 	
 	return wall_tile_data
 
@@ -81,6 +95,12 @@ func initialize_room_from_vertical_hallway(
 	
 	for coords : Vector2i in hallway_coords:
 		floor_tile_map_layer.set_cell(coords)
+		
+	if flip_v_if_bottom and is_bottom and decoration_tile_layer != null:
+		decoration_tile_layer.scale.y = -1
+	else:
+		decoration_tile_layer.scale.y = 1
+	decoration_tile_layer.scale.x = 1
 	
 	return wall_tile_data
 

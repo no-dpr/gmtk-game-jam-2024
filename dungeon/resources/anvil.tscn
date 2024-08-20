@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://yyvrer4b676w"]
+[gd_scene load_steps=10 format=3 uid="uid://yyvrer4b676w"]
 
 [ext_resource type="Texture2D" uid="uid://cccdfmim7hoxu" path="res://dungeon/base.png" id="1_fuqxj"]
 [ext_resource type="Texture2D" uid="uid://c1jibyyrvgdib" path="res://dungeon/decoration.png" id="2_lmsq4"]
+[ext_resource type="PackedScene" uid="uid://c3xkswjwbiveb" path="res://components/interactable_component.tscn" id="3_lceqh"]
+[ext_resource type="PackedScene" uid="uid://dym8rfm0cwkus" path="res://components/action_component.tscn" id="4_die3v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfepj"]
 texture = ExtResource("1_fuqxj")
@@ -690,9 +692,33 @@ terrain_set_0/terrain_1/color = Color(0.822599, 0, 0.245399, 1)
 sources/0 = SubResource("TileSetAtlasSource_qfepj")
 sources/1 = SubResource("TileSetAtlasSource_c1dg0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tmxu"]
+size = Vector2(13, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4i12j"]
+
 [node name="Anvil" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-8, 8)
 tile_map_data = PackedByteArray(0, 0, 255, 255, 254, 255, 1, 0, 10, 0, 4, 0, 0, 0, 0, 0, 254, 255, 1, 0, 11, 0, 4, 0, 0, 0, 0, 0, 255, 255, 1, 0, 11, 0, 5, 0, 0, 0)
 tile_set = SubResource("TileSet_21cc7")
+
+[node name="InteractableComponent" parent="." node_paths=PackedStringArray("sprite", "target") instance=ExtResource("3_lceqh")]
+sprite = NodePath("../TileMapLayer")
+target = NodePath("../Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(-2.5, -5.5)
+shape = SubResource("RectangleShape2D_2tmxu")
+
+[node name="ActionComponent" parent="." instance=ExtResource("4_die3v")]
+stone_cost = 2
+wood_cost = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionComponent"]
+position = Vector2(-2.5, -5.5)
+shape = SubResource("CircleShape2D_4i12j")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-9, -1)

@@ -20,4 +20,6 @@ func _exit() -> void:
 ## Called each frame when this state is active.
 func _update(_delta: float) -> void:
 	if actor.velocity.length_squared() < 1:
-		dispatch(EVENT_FINISHED)
+		dispatch(
+			&"action_started" if blackboard.get_var(&"doing_action", false) else EVENT_FINISHED
+		)

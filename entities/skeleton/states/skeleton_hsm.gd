@@ -1,3 +1,4 @@
+class_name SkeletonHSM
 extends LimboHSM
 
 @export var idle_state: LimboState
@@ -17,4 +18,12 @@ func _ready() -> void:
 	
 	initialize(owner)
 	set_active(true)
+	
+	
+func start_action() -> void:
+	blackboard.set_var(&"doing_action", true)
+	
+func end_action() -> void:
+	blackboard.set_var(&"doing_action", false)
+	dispatch(action_state.EVENT_FINISHED)
 	

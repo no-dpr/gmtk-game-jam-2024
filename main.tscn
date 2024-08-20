@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://q5so6d1cjxcx"]
+[gd_scene load_steps=8 format=3 uid="uid://q5so6d1cjxcx"]
 
 [ext_resource type="PackedScene" uid="uid://dqt37wgynim3e" path="res://entities/necromancer/necromancer.tscn" id="1_6kf73"]
 [ext_resource type="PackedScene" uid="uid://bammro0484ehb" path="res://dungeon/rooms/bedroom.tscn" id="1_jl8sb"]
+[ext_resource type="Script" path="res://misc/navigation_region_2d.gd" id="1_kyfnk"]
 [ext_resource type="Script" path="res://entities/evil_guy_selection.gd" id="1_yalgq"]
 [ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_nt7cx"]
+[ext_resource type="PackedScene" uid="uid://c6oi2605fgj2" path="res://ui/ui.tscn" id="5_8w75k"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1js82"]
 vertices = PackedVector2Array(41, 41, -41, 41, -41, -41, 41, -41, 2033.37, -1414.57, 2205.62, 1897.95, 65.0781, 9, 65.0312, 7, 64.8672, -11.4531, 65.0781, -39, 64.8672, 36.5391, 65.0312, 55, -65.0781, -55, -64.9609, -39, -65.0781, -39, -64.9609, -23, -65.0781, -23, -64.9609, -7, -65.0781, -7, -64.9609, 9, -65, 9, 25, 65.0781, 41, 64.9609, 41, 65.0938, -1555.78, 1877.03, 64.9062, 9, 64.8984, 7, 64.9062, -39, 64.8984, -41, 65.0469, -41, 64.8594, -67.9375, -1462.19, -1197.4, -64.8594, -67.9375, -64.9375, 25, -65.0781, 25, -65.0703, 64.9375, -55, 64.9375, -55, 65.0781, -36.0234, 64.9375, -7, 64.9375, -7, 65.0781, 11.9766, 64.9375, 25, 64.9375, 64.9062, 64.7969, 64.9062, 55, -64.9531, -55, -64.9375, 43.4062)
@@ -15,16 +17,17 @@ agent_radius = 7.0
 y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_1js82")
+script = ExtResource("1_kyfnk")
 
 [node name="Bedroom" parent="NavigationRegion2D" node_paths=PackedStringArray("navigation_region") instance=ExtResource("1_jl8sb")]
 navigation_region = NodePath("..")
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="." groups=["entities"]]
 y_sort_enabled = true
 position = Vector2(20, 0)
 script = ExtResource("1_yalgq")
@@ -40,3 +43,5 @@ position = Vector2(-42, 0)
 
 [node name="Necromancer" parent="Entities" instance=ExtResource("1_6kf73")]
 position = Vector2(-20, 0)
+
+[node name="UI" parent="." instance=ExtResource("5_8w75k")]

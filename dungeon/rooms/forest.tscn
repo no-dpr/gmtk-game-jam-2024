@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=4 uid="uid://cm1bbyhukie05"]
+[gd_scene load_steps=5 format=4 uid="uid://cm1bbyhukie05"]
 
+[ext_resource type="Script" path="res://dungeon/rooms/room.gd" id="1_iv8dq"]
 [ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_oyf67"]
+[ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/horizontal_short_hallway.tscn" id="2_sq8pk"]
+[ext_resource type="PackedScene" uid="uid://do3dfy4egswh0" path="res://dungeon/rooms/hallway/vertical_short_hallway.tscn" id="3_t6o4n"]
 
-[node name="Forest" type="Node2D"]
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("floor_tile_map_layer", "decoration_tile_layer")]
+script = ExtResource("1_iv8dq")
+floor_tile_map_layer = NodePath("Floor")
+decoration_tile_layer = NodePath("Decorations")
+horizontal_hallway_scene = ExtResource("2_sq8pk")
+vertical_hallway_scene = ExtResource("3_t6o4n")
+flip_h_if_left = true
+bottom_left_from_center = Vector2i(-3, 2)
+bottom_right_from_center = Vector2i(2, 2)
+top_left_from_center = Vector2i(-3, -3)
+top_right_from_center = Vector2i(2, -3)
 
 [node name="Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAACAAEAAAAGAAQAAAACAAAAAAAGAAAAAAABAAEAAAACAAAAAAABAAAAAAADAAAAAAABAP//AAACAAEAAAAAAAEAAAADAAEAAAAAAP7/AAACAAAAAAAAAP3/AAAAAAcAAAD//wEAAAACAAEAAAD///7/AAACAAEAAAD///3/AAAEAAcAAAD+/wAAAAACAAEAAAD+//7/AAADAAAAAAD+//3/AAAAAAcAAAD9/wEAAAABAAMAAAD9/wAAAAABAAYAAAD9////AAADAAcAAAD9//7/AAABAAIAAAD9//3/AAAFAAMAAAABAAIAAAAEAAYAAAAAAAIAAAAFAAQAAAD//wIAAAAHAAIAAAD+/wIAAAAHAAIAAAACAAIAAAACAAQAAAD9/wIAAAABAAQAAAD+////AAACAAEAAAD/////AAACAAAAAAAAAAAAAAACAAEAAAACAP//AAAGAAAAAAD+/wEAAAADAAEAAAD//wAAAAADAAEAAAAAAP//AAADAAEAAAACAP7/AAAGAAEAAAABAP3/AAAAAAcAAAABAP7/AAADAAEAAAACAP3/AAACAAMAAAA=")

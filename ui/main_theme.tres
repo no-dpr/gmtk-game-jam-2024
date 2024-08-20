@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bkil8skpq2tu2"]
+
+[ext_resource type="FontFile" uid="uid://ca735u38x2na7" path="res://ui/VCR_OSD_MONO_1.001.ttf" id="1_jck1h"]
+
+[resource]
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("1_jck1h")
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20

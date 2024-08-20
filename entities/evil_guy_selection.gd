@@ -10,10 +10,26 @@ var select_start := Vector2.ZERO
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
-			if selected.size() > 0: 
+			if selected.size() > 0:
+				var target_pos := get_global_mouse_position()
+			
+				var space := get_world_2d().direct_space_state
+				var query := PhysicsPointQueryParameters2D.new()
+				
+				query.position = get_global_mouse_position()
+				query.collide_with_areas = true
+				query.collide_with_bodies = false
+				
+				var intersections := space.intersect_point(query, 1)
+				if intersections.size() == 1:
+					var intersection : Dictionary = intersections[0]
+					var area : Node2D = intersection.collider
+					if area is InteractableComponent:
+						target_pos = area.target.global_position
+					
 				for item : SelectionComponent in selected:
-					item.actor.target_pos = get_global_mouse_position()
-					item.actor.selected = false
+					item.actor.target_pos = target_pos
+					item.selected = false
 				selected = []
 				return
 				
@@ -42,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				.filter(func (object : Object) -> bool: return object is SelectionComponent)
 				
 			for item : SelectionComponent in selected:
-				item.actor.selected = true
+				item.selected = true
 			
 	elif event is InputEventMouseMotion and dragging:
 		queue_redraw()

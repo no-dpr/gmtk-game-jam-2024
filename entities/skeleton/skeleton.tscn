@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b5qwjq47iqbkj"]
+[gd_scene load_steps=34 format=3 uid="uid://b5qwjq47iqbkj"]
 
 [ext_resource type="Texture2D" uid="uid://dqrtvy7jeb0ko" path="res://entities/skeleton/Skeleton.png" id="1_psw8w"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="1_v25s7"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cc0qvbu71rgwg" path="res://components/selection_component.tscn" id="4_0pqhb"]
 [ext_resource type="Shader" path="res://entities/skeleton/outline.gdshader" id="4_35gw5"]
 [ext_resource type="Script" path="res://entities/skeleton/states/skeleton_hsm.gd" id="6_n2on0"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="6_u63mw"]
 [ext_resource type="Script" path="res://entities/skeleton/states/idle_state.gd" id="7_n2p64"]
 [ext_resource type="Script" path="res://entities/skeleton/states/move_state.gd" id="9_itqwi"]
+[ext_resource type="Script" path="res://entities/skeleton/states/action_state.gd" id="12_6kgxb"]
 
 [sub_resource type="Animation" id="Animation_ij8g1"]
 length = 0.001
@@ -24,6 +26,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_tuhhj"]
@@ -63,7 +89,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_juxal"]
 resource_name = "hammer-action"
-length = 0.2
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -73,10 +98,22 @@ tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [10, 11]
+"values": [10, 11, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_rsntw"]
@@ -98,7 +135,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_gr130"]
 resource_name = "sword-action"
-length = 0.2
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -108,10 +144,22 @@ tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [4, 5, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_yqlbj"]
@@ -133,7 +181,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_j1aub"]
 resource_name = "unarmed-action"
-length = 0.2
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -143,10 +190,22 @@ tracks/0/path = NodePath("Sprites/Torso:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [1, 2]
+"values": [1, 2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_odymd"]
@@ -234,9 +293,20 @@ _data = {
 "walk": SubResource("Animation_eloir")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_inuia"]
+shader = ExtResource("4_35gw5")
+shader_parameter/color = Color(0.677393, 0.41897, 0.86203, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dnas7"]
 radius = 8.0
 height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8m7a"]
+size = Vector2(14, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3jhkm"]
 radius = 5.0
@@ -245,31 +315,27 @@ height = 26.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a4jwc"]
 size = Vector2(10, 4)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iln1u"]
-resource_local_to_scene = true
-shader = ExtResource("4_35gw5")
-shader_parameter/enabled = false
-shader_parameter/color = Color(0.675822, 0.491121, 0.775498, 1)
-shader_parameter/width = 1.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jc24m"]
 load_path = "res://.godot/imported/Skeleton.png-591c0962f90c3c7ae64eba5f19a70e76.ctex"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_712d1"]
 var/tool/name = &"tool"
 var/tool/type = 21
-var/tool/value = &"hammer"
+var/tool/value = &"unarmed"
 var/tool/hint = 2
-var/tool/hint_string = "unarmed,sword,bow,hammer"
+var/tool/hint_string = "unarmed,sword,hammer"
+var/doing_action/name = &"doing_action"
+var/doing_action/type = 1
+var/doing_action/value = false
+var/doing_action/hint = 0
+var/doing_action/hint_string = ""
 
-[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("hsm", "sprite")]
 y_sort_enabled = true
 collision_layer = 2
 input_pickable = true
 script = ExtResource("1_xyc37")
+hsm = NodePath("SkeletonHSM")
 sprite = NodePath("Sprites")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_v25s7")]
@@ -292,15 +358,30 @@ libraries = {
 "": SubResource("AnimationLibrary_u61nq")
 }
 
-[node name="SelectionComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_0pqhb")]
+[node name="SelectionComponent" parent="." node_paths=PackedStringArray("actor", "sprite") instance=ExtResource("4_0pqhb")]
 position = Vector2(0, -12)
+outline_material = SubResource("ShaderMaterial_inuia")
 actor = NodePath("..")
+sprite = NodePath("../Sprites")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
 shape = SubResource("CapsuleShape2D_dnas7")
 
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_u63mw")
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(7, -16)
+shape = SubResource("RectangleShape2D_a8m7a")
+disabled = true
+
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_acviw")]
 position = Vector2(0, -12)
+collision_layer = 0
+collision_mask = 2
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -310,7 +391,6 @@ shape = SubResource("CapsuleShape2D_3jhkm")
 shape = SubResource("RectangleShape2D_a4jwc")
 
 [node name="Sprites" type="Node2D" parent="."]
-material = SubResource("ShaderMaterial_iln1u")
 position = Vector2(1, -12)
 
 [node name="Torso" type="Sprite2D" parent="Sprites"]
@@ -341,8 +421,10 @@ animators = NodePath("../../Animators")
 script = ExtResource("9_itqwi")
 animators = NodePath("../../Animators")
 
-[node name="ActionState" type="LimboState" parent="SkeletonHSM"]
+[node name="ActionState" type="LimboState" parent="SkeletonHSM" node_paths=PackedStringArray("animators")]
+script = ExtResource("12_6kgxb")
+animators = NodePath("../../Animators")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-radius = 5.0
+radius = 7.0

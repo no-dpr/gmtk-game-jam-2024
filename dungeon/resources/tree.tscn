@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://cjppajljuhpfu"]
+[gd_scene load_steps=11 format=4 uid="uid://cjppajljuhpfu"]
 
 [ext_resource type="Texture2D" uid="uid://cccdfmim7hoxu" path="res://dungeon/base.png" id="1_k83yy"]
 [ext_resource type="Texture2D" uid="uid://c1jibyyrvgdib" path="res://dungeon/decoration.png" id="2_e161q"]
+[ext_resource type="PackedScene" uid="uid://c3xkswjwbiveb" path="res://components/interactable_component.tscn" id="3_owb3n"]
+[ext_resource type="PackedScene" uid="uid://dym8rfm0cwkus" path="res://components/action_component.tscn" id="4_1tjwi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_28nhg"]
 texture = ExtResource("1_k83yy")
@@ -396,9 +398,42 @@ terrain_set_0/terrain_0/color = Color(0.72793, 0, 0.107553, 1)
 sources/0 = SubResource("TileSetAtlasSource_28nhg")
 sources/1 = SubResource("TileSetAtlasSource_daamg")
 
-[node name="Tree" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_timix"]
+radius = 14.0
+height = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5753e"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsi2n"]
+radius = 6.0
+
+[node name="Tree" type="StaticBody2D"]
 
 [node name="Sprite" type="TileMapLayer" parent="."]
 position = Vector2(8, -8)
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAQAAAD//wEAAQAAAAUAAAAAAAAAAQABAAQAAAAAAAEAAQABAAUAAAD///7/AQAKAAIAAAD/////AQAKAAMAAAAAAP7/AQALAAIAAAAAAP//AQALAAMAAAA=")
 tile_set = SubResource("TileSet_2dg44")
+
+[node name="InteractableComponent" parent="." node_paths=PackedStringArray("sprite", "target") instance=ExtResource("3_owb3n")]
+sprite = NodePath("../Sprite")
+target = NodePath("../Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -6)
+shape = SubResource("CapsuleShape2D_timix")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(8, 14)
+
+[node name="ActionComponent" parent="." instance=ExtResource("4_1tjwi")]
+resource = "wood"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ActionComponent"]
+position = Vector2(8, 6)
+shape = SubResource("CircleShape2D_5753e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 6)
+shape = SubResource("CircleShape2D_nsi2n")
+disabled = true

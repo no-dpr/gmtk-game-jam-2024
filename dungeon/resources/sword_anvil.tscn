@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vem2eao6rddw"]
+
+[ext_resource type="PackedScene" uid="uid://yyvrer4b676w" path="res://dungeon/resources/anvil.tscn" id="1_snhyn"]
+
+[node name="Anvil" instance=ExtResource("1_snhyn")]
+
+[node name="ActionComponent" parent="." index="2"]
+resource = "sword"

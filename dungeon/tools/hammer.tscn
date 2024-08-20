@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp013yuf3qajp"]
+[gd_scene load_steps=10 format=3 uid="uid://dp013yuf3qajp"]
 
 [ext_resource type="Texture2D" uid="uid://cccdfmim7hoxu" path="res://dungeon/base.png" id="1_b502g"]
 [ext_resource type="Texture2D" uid="uid://c1jibyyrvgdib" path="res://dungeon/decoration.png" id="2_imc4r"]
+[ext_resource type="PackedScene" uid="uid://c3xkswjwbiveb" path="res://components/interactable_component.tscn" id="3_5jaiv"]
+[ext_resource type="PackedScene" uid="uid://dsydxnb0c0350" path="res://components/collection_component.tscn" id="4_x26o2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hhfsi"]
 texture = ExtResource("1_b502g")
@@ -395,9 +397,34 @@ terrain_set_0/terrain_0/color = Color(0.72793, 0, 0.107553, 1)
 sources/0 = SubResource("TileSetAtlasSource_hhfsi")
 sources/1 = SubResource("TileSetAtlasSource_geo5n")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq6vt"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hqen"]
+size = Vector2(24, 24)
+
 [node name="Hammer" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-8, 8)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 1, 0, 9, 0, 5, 0, 0, 0)
 tile_set = SubResource("TileSet_sdk6s")
+
+[node name="InteractableComponent" parent="." node_paths=PackedStringArray("sprite", "target") instance=ExtResource("3_5jaiv")]
+position = Vector2(-16, 0)
+sprite = NodePath("../TileMapLayer")
+target = NodePath("../Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_pq6vt")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-8, 8)
+
+[node name="CollectionComponent" parent="." instance=ExtResource("4_x26o2")]
+tool = "hammer"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CollectionComponent"]
+position = Vector2(-4, 12)
+shape = SubResource("RectangleShape2D_2hqen")

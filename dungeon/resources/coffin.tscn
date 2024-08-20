@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://cuettqkpgi3k3"]
+[gd_scene load_steps=12 format=4 uid="uid://cuettqkpgi3k3"]
 
+[ext_resource type="Script" path="res://dungeon/resources/coffin.gd" id="1_6fkbu"]
 [ext_resource type="Texture2D" uid="uid://cccdfmim7hoxu" path="res://dungeon/base.png" id="1_cy4x8"]
 [ext_resource type="Texture2D" uid="uid://c1jibyyrvgdib" path="res://dungeon/decoration.png" id="2_q8uoc"]
+[ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_utng0"]
+[ext_resource type="PackedScene" uid="uid://c3xkswjwbiveb" path="res://components/interactable_component.tscn" id="3_dqflw"]
+[ext_resource type="PackedScene" uid="uid://dym8rfm0cwkus" path="res://components/action_component.tscn" id="4_fxkrd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_httnl"]
 texture = ExtResource("1_cy4x8")
@@ -323,8 +327,11 @@ texture = ExtResource("2_q8uoc")
 0:2/0 = 0
 2:2/0 = 0
 6:2/0 = 0
+6:2/0/z_index = -1
 8:2/0 = 0
+8:2/0/z_index = -1
 9:2/0 = 0
+9:2/0/z_index = -1
 10:2/0 = 0
 11:2/0 = 0
 0:3/0 = 0
@@ -333,8 +340,11 @@ texture = ExtResource("2_q8uoc")
 5:3/0 = 0
 5:3/0/terrain_set = 0
 6:3/0 = 0
+6:3/0/z_index = -1
 8:3/0 = 0
+8:3/0/z_index = -1
 9:3/0 = 0
+9:3/0/z_index = -1
 10:3/0 = 0
 11:3/0 = 0
 0:4/0 = 0
@@ -396,9 +406,62 @@ terrain_set_0/terrain_0/color = Color(0.72793, 0, 0.107553, 1)
 sources/0 = SubResource("TileSetAtlasSource_httnl")
 sources/1 = SubResource("TileSetAtlasSource_caht3")
 
-[node name="Coffin" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ynpq"]
+size = Vector2(33, 17)
 
-[node name="Sprite" type="TileMapLayer" parent="."]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcluh"]
+size = Vector2(19, 34)
+
+[node name="Coffin" type="Node2D" node_paths=PackedStringArray("action_component", "skeleton_spawn")]
+z_index = -1
+script = ExtResource("1_6fkbu")
+skeleton_scene = ExtResource("2_utng0")
+action_component = NodePath("ActionComponent")
+skeleton_spawn = NodePath("SkeletonSpawn")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Top" type="TileMapLayer" parent="Sprites"]
 position = Vector2(8, -8)
-tile_map_data = PackedByteArray("AAD+////AQAIAAIAAAD+/wAAAQAIAAMAAAD/////AQAJAAIAAAD//wAAAQAJAAMAAAAAAP//AQAGAAIAAAAAAAAAAQAGAAMAAAA=")
+tile_map_data = PackedByteArray("AAD+////AQAIAAMAAAAAAP//AQAGAAMAAAD/////AQAJAAMAAAD+//7/AQAIAAIAAAD///7/AQAJAAIAAAAAAP7/AQAGAAIAAAA=")
 tile_set = SubResource("TileSet_jvkcr")
+
+[node name="Bottom" type="TileMapLayer" parent="Sprites"]
+position = Vector2(8, -8)
+tile_map_data = PackedByteArray("AAD+////AQAIAAIAAAD+/wAAAQAIAAMAAAD//wAAAQAJAAMAAAAAAP//AQAGAAIAAAAAAAAAAQAGAAMAAAD/////AQAJAAIAAAA=")
+tile_set = SubResource("TileSet_jvkcr")
+
+[node name="InteractableComponent" parent="." node_paths=PackedStringArray("sprite", "target") instance=ExtResource("3_dqflw")]
+sprite = NodePath("../Sprites/Bottom")
+target = NodePath("../InteractableTarget")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(5.5, -3.5)
+shape = SubResource("RectangleShape2D_8ynpq")
+
+[node name="InteractableComponent2" parent="." node_paths=PackedStringArray("sprite", "target") instance=ExtResource("3_dqflw")]
+position = Vector2(0, -17)
+sprite = NodePath("../Sprites/Top")
+target = NodePath("../InteractableTarget2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent2"]
+position = Vector2(5.5, -3.5)
+shape = SubResource("RectangleShape2D_8ynpq")
+
+[node name="InteractableTarget" type="Marker2D" parent="."]
+position = Vector2(-11, -3)
+
+[node name="InteractableTarget2" type="Marker2D" parent="."]
+position = Vector2(-11, -19)
+
+[node name="ActionComponent" parent="." instance=ExtResource("4_fxkrd")]
+count = 0
+normal_time = 15.0
+hammer_time = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionComponent"]
+position = Vector2(-13.5, -12)
+shape = SubResource("RectangleShape2D_tcluh")
+
+[node name="SkeletonSpawn" type="Marker2D" parent="."]
+position = Vector2(5.5, -3.5)

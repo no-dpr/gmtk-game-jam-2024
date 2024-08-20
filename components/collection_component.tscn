@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsydxnb0c0350"]
+
+[ext_resource type="Script" path="res://components/collection_component.gd" id="1_pstdj"]
+
+[node name="CollectionComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_pstdj")

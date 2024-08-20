@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://q5so6d1cjxcx"]
+[gd_scene load_steps=9 format=3 uid="uid://q5so6d1cjxcx"]
 
 [ext_resource type="PackedScene" uid="uid://dqt37wgynim3e" path="res://entities/necromancer/necromancer.tscn" id="1_6kf73"]
-[ext_resource type="PackedScene" uid="uid://bammro0484ehb" path="res://dungeon/rooms/bedroom.tscn" id="1_jl8sb"]
+[ext_resource type="Script" path="res://main.gd" id="1_kq80m"]
 [ext_resource type="Script" path="res://misc/navigation_region_2d.gd" id="1_kyfnk"]
 [ext_resource type="Script" path="res://entities/evil_guy_selection.gd" id="1_yalgq"]
 [ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_nt7cx"]
+[ext_resource type="PackedScene" uid="uid://c4yxg1d1388ge" path="res://dungeon/rooms/empty_chamber.tscn" id="2_sj438"]
 [ext_resource type="PackedScene" uid="uid://c6oi2605fgj2" path="res://ui/ui.tscn" id="5_8w75k"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1js82"]
@@ -15,33 +16,34 @@ agent_radius = 7.0
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_kq80m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." node_paths=PackedStringArray("empty_chamber")]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_1js82")
 script = ExtResource("1_kyfnk")
+empty_chamber = NodePath("EmptyChamber")
 
-[node name="Bedroom" parent="NavigationRegion2D" node_paths=PackedStringArray("navigation_region") instance=ExtResource("1_jl8sb")]
+[node name="EmptyChamber" parent="NavigationRegion2D" node_paths=PackedStringArray("navigation_region") instance=ExtResource("2_sj438")]
 navigation_region = NodePath("..")
 
 [node name="Entities" type="Node2D" parent="." groups=["entities"]]
 y_sort_enabled = true
-position = Vector2(20, 0)
 script = ExtResource("1_yalgq")
 
 [node name="Jon" parent="Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(-44, 33)
+position = Vector2(-6, 26)
 
 [node name="John" parent="Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(7, 1)
+position = Vector2(15, -3)
 
 [node name="Jhan" parent="Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(-42, 0)
+position = Vector2(-17, -4)
 
 [node name="Necromancer" parent="Entities" instance=ExtResource("1_6kf73")]
-position = Vector2(-20, 0)
+position = Vector2(20, 25)
 
 [node name="UI" parent="." instance=ExtResource("5_8w75k")]

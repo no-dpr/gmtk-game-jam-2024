@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://dlpfshdsqo161"]
+[gd_scene load_steps=6 format=4 uid="uid://dlpfshdsqo161"]
 
 [ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_1fnvs"]
 [ext_resource type="Script" path="res://dungeon/rooms/room.gd" id="1_7du31"]
 [ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/horizontal_short_hallway.tscn" id="2_1y5f2"]
 [ext_resource type="PackedScene" uid="uid://do3dfy4egswh0" path="res://dungeon/rooms/hallway/vertical_short_hallway.tscn" id="3_0l2l5"]
+[ext_resource type="PackedScene" uid="uid://bki1afd82yxf0" path="res://components/spawn_component.tscn" id="5_3xxsn"]
 
 [node name="MiningRoom" type="Node2D" node_paths=PackedStringArray("floor_tile_map_layer", "decoration_tile_layer")]
 script = ExtResource("1_7du31")
@@ -23,3 +24,6 @@ tile_set = ExtResource("1_1fnvs")
 [node name="Decoration" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD+//7/AQAFAAMAAAAAAP7/AgAAAAAACAA=")
 tile_set = ExtResource("1_1fnvs")
+
+[node name="SpawnComponent" parent="." instance=ExtResource("5_3xxsn")]
+position = Vector2(10, -4)

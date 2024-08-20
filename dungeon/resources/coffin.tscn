@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://dungeon/resources/coffin.gd" id="1_6fkbu"]
 [ext_resource type="Texture2D" uid="uid://cccdfmim7hoxu" path="res://dungeon/base.png" id="1_cy4x8"]
 [ext_resource type="Texture2D" uid="uid://c1jibyyrvgdib" path="res://dungeon/decoration.png" id="2_q8uoc"]
-[ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_utng0"]
+[ext_resource type="PackedScene" uid="uid://cqenkvxhrcif3" path="res://entities/skeleton/reanimation/reanimation.tscn" id="2_qf1d3"]
 [ext_resource type="PackedScene" uid="uid://c3xkswjwbiveb" path="res://components/interactable_component.tscn" id="3_dqflw"]
 [ext_resource type="PackedScene" uid="uid://dym8rfm0cwkus" path="res://components/action_component.tscn" id="4_fxkrd"]
 
@@ -415,7 +415,7 @@ size = Vector2(19, 34)
 [node name="Coffin" type="Node2D" node_paths=PackedStringArray("action_component", "skeleton_spawn")]
 z_index = -1
 script = ExtResource("1_6fkbu")
-skeleton_scene = ExtResource("2_utng0")
+skeleton_reanimation_scene = ExtResource("2_qf1d3")
 action_component = NodePath("ActionComponent")
 skeleton_spawn = NodePath("SkeletonSpawn")
 

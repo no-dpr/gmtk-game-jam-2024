@@ -1,8 +1,6 @@
 class_name Skeleton
 extends EvilGuy
 
-@export var hsm : SkeletonHSM
-
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 
 var tool : StringName :
@@ -15,6 +13,14 @@ var tool : StringName :
 		else:
 			hitbox_component.damage = 1
 
+func _ready() -> void:
+	super()
+	Resources.skeleton_count += 1
+	
 func _process(delta: float) -> void:	
 	super(delta)
 	hitbox_component.scale.x = sprite.scale.x
+	
+func die() -> void:
+	Resources.skeleton_count -= 1
+	queue_free()

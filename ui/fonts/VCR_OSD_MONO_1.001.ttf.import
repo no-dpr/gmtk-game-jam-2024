@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://ca735u38x2na7"
-path="res://.godot/imported/VCR_OSD_MONO_1.001.ttf-2a94d7ca9b4291542b9c4adb5b9b42bc.fontdata"
+path="res://.godot/imported/VCR_OSD_MONO_1.001.ttf-511494db945f48562b05eae69ca91d98.fontdata"
 
 [deps]
 
-source_file="res://ui/VCR_OSD_MONO_1.001.ttf"
-dest_files=["res://.godot/imported/VCR_OSD_MONO_1.001.ttf-2a94d7ca9b4291542b9c4adb5b9b42bc.fontdata"]
+source_file="res://ui/fonts/VCR_OSD_MONO_1.001.ttf"
+dest_files=["res://.godot/imported/VCR_OSD_MONO_1.001.ttf-511494db945f48562b05eae69ca91d98.fontdata"]
 
 [params]
 

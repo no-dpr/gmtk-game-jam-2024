@@ -1,11 +1,36 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bkil8skpq2tu2"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bkil8skpq2tu2"]
 
-[ext_resource type="FontFile" uid="uid://ca735u38x2na7" path="res://ui/VCR_OSD_MONO_1.001.ttf" id="1_jck1h"]
+[ext_resource type="FontFile" uid="uid://ca735u38x2na7" path="res://ui/fonts/VCR_OSD_MONO_1.001.ttf" id="1_hgugt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bor6k"]
+bg_color = Color(0.214436, 0.104093, 0.16445, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.143501, 1.63464e-05, 0.145477, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phhyx"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+bg_color = Color(0.34199, 0.780873, 0.523878, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.0572364, 0.374068, 0.174063, 1)
 
 [resource]
-Label/font_sizes/font_size = 64
-Label/fonts/font = ExtResource("1_jck1h")
+HBoxContainer/constants/separation = 16
+Label/colors/font_color = Color(0.665448, 0.836118, 0.735722, 1)
+Label/font_sizes/font_size = 96
+Label/fonts/font = ExtResource("1_hgugt")
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_bor6k")
+PriceContainer/base_type = &"PanelContainer"
+PriceContainer/styles/panel = SubResource("StyleBoxFlat_phhyx")

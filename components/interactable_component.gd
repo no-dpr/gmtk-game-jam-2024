@@ -8,9 +8,9 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("ready")
+
 	input_pickable = true
-	print(collision_layer)
+
 	
 	mouse_entered.connect(set_outline)
 	mouse_exited.connect(remove_outline)
@@ -21,9 +21,9 @@ func _ready() -> void:
 	)
 
 func set_outline() -> void:
-	print("outline")
+
 	sprite.material = outline_material
 	
 func remove_outline() -> void:
-	print("no outline")
+
 	sprite.material = null

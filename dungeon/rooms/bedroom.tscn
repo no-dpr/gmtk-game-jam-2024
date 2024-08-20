@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bammro0484ehb"]
+[gd_scene load_steps=5 format=4 uid="uid://bammro0484ehb"]
 
 [ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_du52s"]
 [ext_resource type="Script" path="res://dungeon/rooms/room.gd" id="1_f3qmd"]
 [ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/horizontal_short_hallway.tscn" id="2_4qjf5"]
 [ext_resource type="PackedScene" uid="uid://do3dfy4egswh0" path="res://dungeon/rooms/hallway/vertical_short_hallway.tscn" id="3_0ls2l"]
-[ext_resource type="PackedScene" uid="uid://cnwe3b4hp1qfv" path="res://dungeon/rooms/tool_rooms/hammer_room.tscn" id="4_els35"]
 
 [node name="Bedroom" type="Node2D" node_paths=PackedStringArray("floor_tile_map_layer", "decoration_tile_layer")]
 y_sort_enabled = true
@@ -17,7 +16,6 @@ bottom_left_from_center = Vector2i(-4, 3)
 bottom_right_from_center = Vector2i(3, 3)
 top_left_from_center = Vector2i(-4, -4)
 top_right_from_center = Vector2i(3, -4)
-additional_room_scene = ExtResource("4_els35")
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -1

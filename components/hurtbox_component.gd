@@ -10,6 +10,7 @@ func _ready() -> void:
 	
 func on_hitbox_entered(hitbox: Area2D) -> void:
 	if hitbox is HitboxComponent:
+		print(hitbox.damage)
 		health_component.damage(hitbox.damage)
 		hitbox.hit_hurtbox.emit(self)
 		hurt.emit(hitbox)

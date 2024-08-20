@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://o6rjnvcpsesi"]
-
-[ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="1_klqas"]
-
-[node name="Adventurer" type="CharacterBody2D"]
-
-[node name="HealthComponent" parent="." instance=ExtResource("1_klqas")]
-max_health = 15.0

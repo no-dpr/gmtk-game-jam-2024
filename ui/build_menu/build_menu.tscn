@@ -1,0 +1,106 @@
+[gd_scene load_steps=18 format=3 uid="uid://djre28rvixtag"]
+
+[ext_resource type="Script" path="res://ui/build_menu/build_menu.gd" id="1_6214n"]
+[ext_resource type="PackedScene" uid="uid://dxbn6kj0q31dv" path="res://ui/build_menu/room_panel.tscn" id="1_v47xh"]
+[ext_resource type="PackedScene" uid="uid://bammro0484ehb" path="res://dungeon/rooms/bedroom.tscn" id="3_1d532"]
+[ext_resource type="Texture2D" uid="uid://d5ah5g3ygowb" path="res://ui/build_menu/ui_atlas.tres" id="4_f8hg6"]
+[ext_resource type="PackedScene" uid="uid://c4yxg1d1388ge" path="res://dungeon/rooms/empty_chamber.tscn" id="5_52x4p"]
+[ext_resource type="Texture2D" uid="uid://c6rffi810r5xa" path="res://ui/build_menu/ui_sprites.png" id="6_i4sfk"]
+[ext_resource type="PackedScene" uid="uid://dlpfshdsqo161" path="res://dungeon/rooms/mining_room.tscn" id="7_4urf1"]
+[ext_resource type="PackedScene" uid="uid://cm1bbyhukie05" path="res://dungeon/rooms/forest.tscn" id="8_j23or"]
+[ext_resource type="PackedScene" uid="uid://cut8hk3vx8tsi" path="res://dungeon/rooms/graveyard.tscn" id="9_dxupd"]
+[ext_resource type="PackedScene" uid="uid://syrpk5m2x5s3" path="res://dungeon/rooms/tool_rooms/sword_room.tscn" id="10_2rylu"]
+[ext_resource type="PackedScene" uid="uid://cnwe3b4hp1qfv" path="res://dungeon/rooms/tool_rooms/hammer_room.tscn" id="11_rklop"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nw16"]
+atlas = ExtResource("6_i4sfk")
+region = Rect2(65, 1, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oftck"]
+atlas = ExtResource("6_i4sfk")
+region = Rect2(1, 33, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myymw"]
+atlas = ExtResource("6_i4sfk")
+region = Rect2(33, 33, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk0ad"]
+atlas = ExtResource("6_i4sfk")
+region = Rect2(65, 33, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_473ir"]
+atlas = ExtResource("6_i4sfk")
+region = Rect2(97, 33, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq1ph"]
+atlas = ExtResource("6_i4sfk")
+region = Rect2(33, 65, 30, 30)
+
+[node name="BuildMenu" type="MarginContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6214n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.2244, 0.34, 0.257153, 0.337255)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Bedroom" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("3_1d532")
+room_name = &"Bedroom"
+room_icon = ExtResource("4_f8hg6")
+room_price = 7
+build_menu = NodePath("../..")
+
+[node name="EmptyChamber" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("5_52x4p")
+room_name = &"Empty Chamber"
+room_icon = SubResource("AtlasTexture_4nw16")
+room_price = 5
+build_menu = NodePath("../..")
+
+[node name="Mine" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("7_4urf1")
+room_name = &"Mineshaft"
+room_icon = SubResource("AtlasTexture_oftck")
+build_menu = NodePath("../..")
+
+[node name="Forest" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("8_j23or")
+room_name = &"Forest"
+room_icon = SubResource("AtlasTexture_myymw")
+build_menu = NodePath("../..")
+
+[node name="Graveyard" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("9_dxupd")
+room_name = &"Graveyard"
+room_icon = SubResource("AtlasTexture_bk0ad")
+build_menu = NodePath("../..")
+
+[node name="SwordArmory" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("10_2rylu")
+room_name = &"Sword Armory"
+room_icon = SubResource("AtlasTexture_473ir")
+build_menu = NodePath("../..")
+
+[node name="HammerArmory" parent="VBoxContainer" node_paths=PackedStringArray("build_menu") instance=ExtResource("1_v47xh")]
+layout_mode = 2
+room_scene = ExtResource("11_rklop")
+room_name = &"Hammer Armory"
+room_icon = SubResource("AtlasTexture_mq1ph")
+build_menu = NodePath("../..")

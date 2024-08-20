@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=3 uid="uid://bki1afd82yxf0"]
+
+[ext_resource type="Script" path="res://components/spawn_component.gd" id="1_oepi7"]
+[ext_resource type="PackedScene" uid="uid://o6rjnvcpsesi" path="res://entities/adventurers/knight.tscn" id="2_c1dy0"]
+[ext_resource type="PackedScene" uid="uid://cry2vjg652j2m" path="res://entities/adventurers/rogue.tscn" id="3_j3q1k"]
+[ext_resource type="PackedScene" uid="uid://bqgov40dspxhs" path="res://entities/adventurers/wizard.tscn" id="4_7cs2s"]
+
+[node name="SpawnComponent" type="Marker2D"]
+script = ExtResource("1_oepi7")
+knight_scene = ExtResource("2_c1dy0")
+rogue_scene = ExtResource("3_j3q1k")
+wizard_scene = ExtResource("4_7cs2s")

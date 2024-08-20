@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwbakcp465en3"]
+
+[ext_resource type="Script" path="res://autoload/phase_manager.gd" id="1_tc87k"]
+
+[node name="PhaseManager" type="Node"]
+script = ExtResource("1_tc87k")

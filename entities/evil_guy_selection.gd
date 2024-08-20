@@ -12,6 +12,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_pressed():
 			if selected.size() > 0:
 				var target_pos := get_global_mouse_position()
+				var target : Node2D = null
 			
 				var space := get_world_2d().direct_space_state
 				var query := PhysicsPointQueryParameters2D.new()
@@ -25,9 +26,12 @@ func _unhandled_input(event: InputEvent) -> void:
 					var intersection : Dictionary = intersections[0]
 					var area : Node2D = intersection.collider
 					if area is InteractableComponent:
-						target_pos = area.target.global_position
+						target = area.target
 					
 				for item : SelectionComponent in selected:
+					if not is_instance_valid(item): continue
+					item.actor.target = target
+					item.actor.is_targetting_node = target != null
 					item.actor.target_pos = target_pos
 					item.selected = false
 				selected = []

@@ -1,0 +1,336 @@
+[gd_scene load_steps=25 format=3 uid="uid://o6rjnvcpsesi"]
+
+[ext_resource type="Script" path="res://entities/adventurers/adventurer.gd" id="1_0luy7"]
+[ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="2_whw1p"]
+[ext_resource type="Texture2D" uid="uid://ke6ngnuvfgcu" path="res://entities/adventurers/images/knight.png" id="3_5aaff"]
+[ext_resource type="PackedScene" uid="uid://c3xkswjwbiveb" path="res://components/interactable_component.tscn" id="4_u00lk"]
+[ext_resource type="PackedScene" uid="uid://dym8rfm0cwkus" path="res://components/action_component.tscn" id="5_150hw"]
+[ext_resource type="PackedScene" uid="uid://bitw7wbqakumy" path="res://components/hurtbox_component.tscn" id="5_exwnq"]
+[ext_resource type="Script" path="res://entities/adventurers/states/necromancer_hsm.gd" id="7_fpf14"]
+[ext_resource type="PackedScene" uid="uid://ck4bnfoldplqp" path="res://components/hitbox_component.tscn" id="7_s43cr"]
+[ext_resource type="Script" path="res://entities/adventurers/states/idle_state.gd" id="8_k03kh"]
+[ext_resource type="Script" path="res://entities/adventurers/states/move_state.gd" id="9_xcrm4"]
+[ext_resource type="Script" path="res://entities/adventurers/states/attack_state.gd" id="10_3wtlt"]
+[ext_resource type="Script" path="res://entities/adventurers/states/death_state.gd" id="11_jjaer"]
+
+[sub_resource type="Animation" id="Animation_5pvg0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Legs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Torso:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_k8so8"]
+resource_name = "attack"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Legs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Torso:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_v6e3c"]
+resource_name = "death"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Legs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"die"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nmffd"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Legs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_g2d7t"]
+resource_name = "walk"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Legs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_275hk"]
+_data = {
+"RESET": SubResource("Animation_5pvg0"),
+"attack": SubResource("Animation_k8so8"),
+"death": SubResource("Animation_v6e3c"),
+"idle": SubResource("Animation_nmffd"),
+"walk": SubResource("Animation_g2d7t")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6pyg2"]
+radius = 7.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tvo1v"]
+radius = 13.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mmvt8"]
+radius = 23.0217
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f56y3"]
+size = Vector2(15.5, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4dgs"]
+size = Vector2(46, 24)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_kptny"]
+var/attacking/name = &"attacking"
+var/attacking/type = 1
+var/attacking/value = false
+var/attacking/hint = 0
+var/attacking/hint_string = ""
+
+[node name="Knight" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hsm", "death_sprite")]
+script = ExtResource("1_0luy7")
+sprite = NodePath("Sprites")
+hsm = NodePath("AdventurerHSM")
+death_sprite = NodePath("Sprites/Torso")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_whw1p")]
+max_health = 1.0
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2(1, -9)
+
+[node name="Torso" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+texture = ExtResource("3_5aaff")
+hframes = 3
+vframes = 3
+
+[node name="Legs" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+texture = ExtResource("3_5aaff")
+hframes = 3
+vframes = 3
+frame = 3
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_275hk")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6pyg2")
+
+[node name="InteractableComponent" parent="." node_paths=PackedStringArray("sprite", "target") instance=ExtResource("4_u00lk")]
+sprite = NodePath("../Sprites")
+target = NodePath("../Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(-2, -8)
+shape = SubResource("CapsuleShape2D_tvo1v")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="ActionComponent" parent="." node_paths=PackedStringArray("interactable") instance=ExtResource("5_150hw")]
+count = 0
+use_timers = false
+target_if_seen = true
+interactable = NodePath("../InteractableComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionComponent"]
+position = Vector2(-2, -8)
+shape = SubResource("CircleShape2D_mmvt8")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_exwnq")]
+collision_layer = 0
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-2, -8)
+shape = SubResource("CapsuleShape2D_tvo1v")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("7_s43cr")]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(8.25, -4)
+shape = SubResource("RectangleShape2D_f56y3")
+disabled = true
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-2, 2)
+shape = SubResource("RectangleShape2D_o4dgs")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 15.0
+avoidance_enabled = true
+radius = 7.0
+
+[node name="AdventurerHSM" type="LimboHSM" parent="." node_paths=PackedStringArray("idle_state", "walk_state", "attack_state", "death_state")]
+blackboard_plan = SubResource("BlackboardPlan_kptny")
+script = ExtResource("7_fpf14")
+idle_state = NodePath("IdleState")
+walk_state = NodePath("MoveState")
+attack_state = NodePath("AttackState")
+death_state = NodePath("DeathState")
+
+[node name="IdleState" type="LimboState" parent="AdventurerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("8_k03kh")
+animator = NodePath("../../Animator")
+
+[node name="MoveState" type="LimboState" parent="AdventurerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("9_xcrm4")
+animator = NodePath("../../Animator")
+
+[node name="AttackState" type="LimboState" parent="AdventurerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("10_3wtlt")
+animator = NodePath("../../Animator")
+
+[node name="DeathState" type="LimboState" parent="AdventurerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("11_jjaer")
+animator = NodePath("../../Animator")

@@ -1,51 +1,269 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqt37wgynim3e"]
+[gd_scene load_steps=26 format=3 uid="uid://dqt37wgynim3e"]
 
-[ext_resource type="Script" path="res://entities/evil_guy.gd" id="1_68rot"]
-[ext_resource type="Texture2D" uid="uid://cyi7qnfplf5sp" path="res://icon.svg" id="1_opm1v"]
+[ext_resource type="Script" path="res://entities/necromancer/necromancer.gd" id="1_2vlrj"]
+[ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="2_2ue01"]
 [ext_resource type="Shader" path="res://entities/skeleton/outline.gdshader" id="2_i6yr8"]
+[ext_resource type="Texture2D" uid="uid://bbdt8a2yrw3tp" path="res://entities/necromancer/necromancer.png" id="2_v4bvi"]
 [ext_resource type="PackedScene" uid="uid://cc0qvbu71rgwg" path="res://components/selection_component.tscn" id="3_hi220"]
+[ext_resource type="PackedScene" uid="uid://bitw7wbqakumy" path="res://components/hurtbox_component.tscn" id="5_lw0he"]
+[ext_resource type="Script" path="res://entities/necromancer/revivify_box.gd" id="7_426pk"]
+[ext_resource type="Script" path="res://entities/necromancer/states/necromancer_hsm.gd" id="7_rls36"]
+[ext_resource type="Script" path="res://entities/necromancer/states/idle_state.gd" id="8_bcdie"]
+[ext_resource type="Script" path="res://entities/necromancer/detection_box.gd" id="8_fekam"]
+[ext_resource type="Script" path="res://entities/necromancer/states/move_state.gd" id="9_4ltx2"]
+[ext_resource type="Script" path="res://entities/necromancer/states/revive_state.gd" id="10_lckoh"]
+[ext_resource type="Script" path="res://entities/necromancer/states/death_state.gd" id="11_1tsm4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qol22"]
+[sub_resource type="Animation" id="Animation_t3djf"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dm6f5"]
-shader = ExtResource("2_i6yr8")
-shader_parameter/color = Color(0.727037, 0.308586, 1, 1)
-shader_parameter/width = 10.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
+[sub_resource type="Animation" id="Animation_k2jyr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RevivifyBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mgh3i"]
+resource_name = "walk"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_vumsj"]
+resource_name = "revive"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RevivifyBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NecromancerHSM")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_reviving"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1fksv"]
+resource_name = "death"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qbu2"]
+_data = {
+"RESET": SubResource("Animation_k2jyr"),
+"death": SubResource("Animation_1fksv"),
+"idle": SubResource("Animation_t3djf"),
+"revive": SubResource("Animation_vumsj"),
+"walk": SubResource("Animation_mgh3i")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t258g"]
 shader = ExtResource("2_i6yr8")
 shader_parameter/color = Color(0.475121, 0.746868, 0.483133, 1)
-shader_parameter/width = 10.0
+shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_itaat"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cm6py"]
+radius = 19.0
+height = 38.0
 
-[node name="Necromancer" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jyudg"]
+radius = 3.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ml8vk"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1glha"]
+radius = 27.0185
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_n0pd8"]
+var/reviving/name = &"reviving"
+var/reviving/type = 1
+var/reviving/value = false
+var/reviving/hint = 0
+var/reviving/hint_string = ""
+
+[node name="Necromancer" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hsm") groups=["evil_guys"]]
 collision_layer = 2
-script = ExtResource("1_68rot")
+script = ExtResource("1_2vlrj")
 id = &"necromancer"
-sprite = NodePath("Sprite2D")
+sprite = NodePath("SpriteContainer")
+hsm = NodePath("NecromancerHSM")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qol22")
+[node name="HealthComponent" parent="." instance=ExtResource("2_2ue01")]
+max_health = 1.0
 
-[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7qbu2")
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_dm6f5")
-scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("1_opm1v")
+[node name="SpriteContainer" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="SpriteContainer"]
+use_parent_material = true
+position = Vector2(6, -11)
+texture = ExtResource("2_v4bvi")
+hframes = 3
+vframes = 3
 
 [node name="SelectionComponent" parent="." node_paths=PackedStringArray("actor", "sprite") instance=ExtResource("3_hi220")]
 outline_material = SubResource("ShaderMaterial_t258g")
 actor = NodePath("..")
-sprite = NodePath("../Sprite2D")
+sprite = NodePath("../SpriteContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
-shape = SubResource("RectangleShape2D_itaat")
+position = Vector2(4, -9)
+shape = SubResource("CapsuleShape2D_cm6py")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_lw0he")]
+collision_layer = 0
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_jyudg")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_ml8vk")
+
+[node name="RevivifyBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("7_426pk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevivifyBox"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_1glha")
+disabled = true
+
+[node name="DetectionBox" type="Area2D" parent="." node_paths=PackedStringArray("hsm")]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("8_fekam")
+hsm = NodePath("../NecromancerHSM")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionBox"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_1glha")
+
+[node name="NecromancerHSM" type="LimboHSM" parent="." node_paths=PackedStringArray("idle_state", "walk_state", "revive_state", "death_state")]
+blackboard_plan = SubResource("BlackboardPlan_n0pd8")
+script = ExtResource("7_rls36")
+idle_state = NodePath("IdleState")
+walk_state = NodePath("MoveState")
+revive_state = NodePath("ReviveState")
+death_state = NodePath("DeathState")
+
+[node name="IdleState" type="LimboState" parent="NecromancerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("8_bcdie")
+animator = NodePath("../../Animator")
+
+[node name="MoveState" type="LimboState" parent="NecromancerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("9_4ltx2")
+animator = NodePath("../../Animator")
+
+[node name="ReviveState" type="LimboState" parent="NecromancerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("10_lckoh")
+animator = NodePath("../../Animator")
+
+[node name="DeathState" type="LimboState" parent="NecromancerHSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("11_1tsm4")
+animator = NodePath("../../Animator")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+target_desired_distance = 20.0
+avoidance_enabled = true
+radius = 7.0

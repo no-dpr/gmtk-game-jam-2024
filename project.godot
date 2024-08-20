@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="untitled necromancy game"
+config/name="BusyBones"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Resources="*res://autoload/resources.tscn"
 NavigationGlobals="*res://autoload/navigation_globals.tscn"
+Globals="*res://autoload/Globals.tscn"
+PhaseManager="*res://autoload/phase_manager.gd"
 
 [debug]
 
@@ -28,6 +30,7 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -36,6 +39,7 @@ project/assembly_name="untitled necromancy game"
 [global_group]
 
 entities=""
+evil_guys=""
 
 [input]
 

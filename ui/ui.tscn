@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6oi2605fgj2"]
+[gd_scene load_steps=3 format=3 uid="uid://c6oi2605fgj2"]
 
-[ext_resource type="PackedScene" uid="uid://bvc0v8i5qg68g" path="res://ui/hud.tscn" id="1_igp28"]
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_epari"]
+[ext_resource type="PackedScene" uid="uid://bvc0v8i5qg68g" path="res://ui/hud/hud.tscn" id="1_igp28"]
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_epari")
 
 [node name="HUD" parent="." instance=ExtResource("1_igp28")]
 mouse_filter = 2

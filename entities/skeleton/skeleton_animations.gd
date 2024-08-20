@@ -17,3 +17,7 @@ func play_animation(animation: StringName, tool: StringName) -> void:
 	
 	legs_animator.play(leg_animation)
 	torso_animator.play(torso_animation)
+
+func play_death() -> void:
+	torso_animator.play(&"death")
+	legs_animator.play(&"death")

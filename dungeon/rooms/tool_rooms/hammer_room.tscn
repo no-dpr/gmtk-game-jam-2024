@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://cnwe3b4hp1qfv"]
+[gd_scene load_steps=5 format=4 uid="uid://cnwe3b4hp1qfv"]
 
 [ext_resource type="Script" path="res://dungeon/rooms/room.gd" id="1_2m7hy"]
 [ext_resource type="TileSet" uid="uid://bo2h6f6e0o3cc" path="res://dungeon/tileset.tres" id="1_xq754"]
 [ext_resource type="PackedScene" uid="uid://bni1vmi41o6wd" path="res://dungeon/rooms/hallway/horizontal_short_hallway.tscn" id="2_u8wy6"]
 [ext_resource type="PackedScene" uid="uid://do3dfy4egswh0" path="res://dungeon/rooms/hallway/vertical_short_hallway.tscn" id="3_xcppf"]
-[ext_resource type="PackedScene" uid="uid://syrpk5m2x5s3" path="res://dungeon/rooms/tool_rooms/sword_room.tscn" id="4_layn6"]
 
 [node name="HammerRoom" type="Node2D" node_paths=PackedStringArray("floor_tile_map_layer", "decoration_tile_layer")]
 script = ExtResource("1_2m7hy")
@@ -17,7 +16,6 @@ bottom_left_from_center = Vector2i(-2, 1)
 bottom_right_from_center = Vector2i(2, 1)
 top_left_from_center = Vector2i(-2, -3)
 top_right_from_center = Vector2i(2, -3)
-additional_room_scene = ExtResource("4_layn6")
 
 [node name="Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAACAAEAAAACAAQAAAACAAAAAAAGAAEAAAACAP//AAAGAAAAAAACAP7/AAAGAAAAAAACAP3/AAACAAMAAAABAAEAAAAFAAYAAAABAAAAAAADAAEAAAABAP//AAADAAEAAAABAP7/AAACAAAAAAABAP3/AAAEAAEAAAAAAAEAAAAFAAQAAAAAAAAAAAADAAAAAAAAAP//AAADAAAAAAAAAP7/AAACAAEAAAAAAP3/AAAFAAEAAAD//wEAAAAHAAIAAAD//wAAAAADAAEAAAD/////AAADAAEAAAD///7/AAADAAAAAAD///3/AAAHAAUAAAD+/wEAAAABAAQAAAD+/wAAAAABAAIAAAD+////AAABAAIAAAD+//7/AAABAAMAAAD+//3/AAAFAAMAAAA=")

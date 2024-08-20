@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://4ck325i13txk"
+path="res://.godot/imported/Battle Stations! Intro.mp3-26101b1a67bd098258914e85ab2b5a17.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Battle Stations! Intro.mp3"
+dest_files=["res://.godot/imported/Battle Stations! Intro.mp3-26101b1a67bd098258914e85ab2b5a17.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

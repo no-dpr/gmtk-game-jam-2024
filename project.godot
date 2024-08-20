@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="BusyBones"
-run/main_scene="res://main.tscn"
+run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -21,6 +21,7 @@ Resources="*res://autoload/resources.tscn"
 NavigationGlobals="*res://autoload/navigation_globals.tscn"
 Globals="*res://autoload/Globals.tscn"
 PhaseManager="*res://autoload/phase_manager.gd"
+MusicManager="*res://autoload/music_manager.gd"
 
 [debug]
 

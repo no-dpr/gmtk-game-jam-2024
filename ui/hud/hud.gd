@@ -2,7 +2,6 @@ extends MarginContainer
 
 @onready var wood: Label = %Wood
 @onready var stone: Label = %Stone
-@onready var adventurers: Label = %Adventurers
 @onready var skeletons: Label = %Skeletons
 @onready var swords: Label = %Swords
 @onready var hammers: Label = %Hammers

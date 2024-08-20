@@ -14,6 +14,7 @@ extends CharacterBody2D
 @onready var detection_area: Area2D = $DetectionArea
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 
+@onready var collision_shape_2d: CollisionShape2D = $DetectionArea/CollisionShape2D
 
 var map_changed := false
 
@@ -33,8 +34,9 @@ func _ready() -> void:
 	detection_area.body_exited.connect(_on_body_exited)
 	
 func _physics_process(_delta: float) -> void:
-	
+	collision_shape_2d.disabled = false
 	if (target == null or not is_instance_valid(target)):
+		collision_shape_2d.disabled = true
 		var evil_guys := get_tree().get_nodes_in_group(&"evil_guys")
 		if evil_guys.size() > 0:
 			evil_guys.sort_custom(
@@ -91,7 +93,7 @@ func on_map_changed(_map : RID) -> void:
 			
 func die() -> void:
 	PhaseManager.adventurers_alive -= 1
-	
+	Globals.adventurers_slain += 1
 	var corpse : Corpse = corpse_scene.instantiate()
 	add_sibling(corpse)
 	

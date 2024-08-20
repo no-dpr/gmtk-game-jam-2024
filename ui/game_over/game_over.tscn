@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca06ojnihcpkb"]
+
+[ext_resource type="Script" path="res://ui/game_over/game_over.gd" id="1_6dd8c"]
+[ext_resource type="Theme" uid="uid://bkil8skpq2tu2" path="res://ui/main_theme.tres" id="1_20ffd"]
+[ext_resource type="AudioStream" uid="uid://cmfu2o7o130u2" path="res://assets/music/You Fucked Up Woopsie!.mp3" id="3_g04mg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auepw"]
+content_margin_left = 50.0
+content_margin_top = 40.0
+content_margin_right = 50.0
+content_margin_bottom = 50.0
+bg_color = Color(0.214436, 0.104093, 0.16445, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.143501, 1.63464e-05, 0.145477, 1)
+
+[node name="GameOver" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6dd8c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.158086, 0.103308, 0.216843, 0.470588)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.5
+offset_top = -173.0
+offset_right = 506.5
+offset_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_20ffd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_auepw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="GameOver" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_20ffd")
+theme_override_colors/font_color = Color(0.75353, 0.348918, 0.724307, 1)
+theme_override_font_sizes/font_size = 192
+text = "Game Over
+"
+
+[node name="Description" type="Label" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme = ExtResource("1_20ffd")
+theme_override_colors/font_color = Color(0.75353, 0.348918, 0.724307, 1)
+theme_override_font_sizes/font_size = 64
+text = "Before you died, you slayed %2d adventurers and built %2d rooms."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TryAgain" type="Label" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme = ExtResource("1_20ffd")
+theme_override_colors/font_color = Color(0.75353, 0.348918, 0.724307, 1)
+theme_override_font_sizes/font_size = 64
+text = "Press Enter to Try Again"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="GameOverJingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g04mg")

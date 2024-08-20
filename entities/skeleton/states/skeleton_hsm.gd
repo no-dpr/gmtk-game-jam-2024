@@ -27,6 +27,7 @@ func start_action() -> void:
 	blackboard.set_var(&"doing_action", true)
 	
 func end_action() -> void:
+	if not is_instance_valid(blackboard): return
 	blackboard.set_var(&"doing_action", false)
 	dispatch(action_state.EVENT_FINISHED)
 	

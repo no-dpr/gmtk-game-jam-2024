@@ -4,5 +4,3 @@
 
 [node name="Resources" type="Node"]
 script = ExtResource("1_ekt4e")
-stone_count = 5
-wood_count = 5

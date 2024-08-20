@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvc0v8i5qg68g"]
+[gd_scene load_steps=8 format=3 uid="uid://bvc0v8i5qg68g"]
 
 [ext_resource type="Theme" uid="uid://bkil8skpq2tu2" path="res://ui/main_theme.tres" id="1_xg5hf"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="2_km27n"]
+[ext_resource type="Texture2D" uid="uid://cv3djyxyomypw" path="res://ui/icons/wood_ui.png" id="3_f2b0h"]
+[ext_resource type="Texture2D" uid="uid://b6qtq5nluodeo" path="res://ui/icons/rock_ui.png" id="4_5idfh"]
+[ext_resource type="Texture2D" uid="uid://7ovndo6qhc6v" path="res://components/skeleton_ui.png" id="5_k527x"]
+[ext_resource type="Texture2D" uid="uid://cy1ymiq8vmigl" path="res://ui/icons/sword_ui.png" id="6_4axut"]
+[ext_resource type="Texture2D" uid="uid://dieor5cwbcnu0" path="res://ui/icons/hammer_ui.png" id="7_dr5yk"]
 
 [node name="HUD" type="MarginContainer"]
 anchors_preset = 15
@@ -16,52 +21,134 @@ script = ExtResource("2_km27n")
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Wood" type="Label" parent="Resources"]
+[node name="WoodContainer" type="HBoxContainer" parent="Resources"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Resources/WoodContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="WoodIcon" type="TextureRect" parent="Resources/WoodContainer/MarginContainer"]
+custom_minimum_size = Vector2(86, 96)
+layout_mode = 2
+texture = ExtResource("3_f2b0h")
+stretch_mode = 6
+
+[node name="Wood" type="Label" parent="Resources/WoodContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_xg5hf")
-text = "Wood: "
+text = "10"
 
-[node name="Stone" type="Label" parent="Resources"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Resources"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Resources/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="StoneIcon" type="TextureRect" parent="Resources/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture = ExtResource("4_5idfh")
+stretch_mode = 5
+
+[node name="Stone" type="Label" parent="Resources/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_xg5hf")
-text = "Stone: "
+text = "10
+"
 
-[node name="Adventurers" type="Label" parent="."]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 0
-theme = ExtResource("1_xg5hf")
-text = "0 Left"
+size_flags_vertical = 8
+theme_override_constants/separation = 20
 
-[node name="Skeletons" type="Label" parent="."]
+[node name="Skeletons" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme = ExtResource("1_xg5hf")
-text = "Skeletons: "
+text = "10"
 
-[node name="Tools" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="SkeletonIcon" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture = ExtResource("5_k527x")
+stretch_mode = 5
+
+[node name="Tools" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Swords" type="Label" parent="Tools"]
-unique_name_in_owner = true
+[node name="WoodContainer" type="HBoxContainer" parent="Tools"]
 layout_mode = 2
-theme = ExtResource("1_xg5hf")
-text = "Swords: "
+theme_override_constants/separation = 0
 
-[node name="Hammers" type="Label" parent="Tools"]
+[node name="MarginContainer" type="MarginContainer" parent="Tools/WoodContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="SwordIcon" type="TextureRect" parent="Tools/WoodContainer/MarginContainer"]
+custom_minimum_size = Vector2(86, 96)
+layout_mode = 2
+texture = ExtResource("6_4axut")
+stretch_mode = 6
+
+[node name="Swords" type="Label" parent="Tools/WoodContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_xg5hf")
-text = "Hammers: "
+text = "1
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tools"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Tools/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HammerIcon" type="TextureRect" parent="Tools/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture = ExtResource("7_dr5yk")
+stretch_mode = 5
+
+[node name="Hammers" type="Label" parent="Tools/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_xg5hf")
+text = "1
+"
 
 [node name="Phases" type="VBoxContainer" parent="."]
 layout_mode = 2

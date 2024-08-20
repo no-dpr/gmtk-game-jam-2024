@@ -30,6 +30,8 @@ extends Node2D
 @onready var build_ui_scene : PackedScene = load("res://ui/build_menu/build_menu.tscn")
 
 func _ready() -> void:
+	Globals.rooms_created += 1
+	
 	y_sort_enabled = true
 	for child : Node2D in get_children():
 		child.y_sort_enabled = true

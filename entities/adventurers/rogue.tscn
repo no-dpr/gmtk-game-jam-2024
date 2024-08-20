@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cry2vjg652j2m"]
+[gd_scene load_steps=29 format=3 uid="uid://cry2vjg652j2m"]
 
 [ext_resource type="Script" path="res://entities/adventurers/adventurer.gd" id="1_d1kke"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="2_6c62h"]
@@ -12,6 +12,10 @@
 [ext_resource type="Script" path="res://entities/adventurers/states/move_state.gd" id="10_m4chh"]
 [ext_resource type="Script" path="res://entities/adventurers/states/attack_state.gd" id="11_ea1nc"]
 [ext_resource type="Script" path="res://entities/adventurers/states/death_state.gd" id="12_1rgv5"]
+[ext_resource type="PackedScene" uid="uid://cbtsp0imxx3f5" path="res://components/footsteps_component.tscn" id="13_cn0wl"]
+[ext_resource type="AudioStream" uid="uid://c3147pen5h02u" path="res://entities/adventurers/sounds/roguedie.wav" id="14_0emia"]
+[ext_resource type="PackedScene" uid="uid://c2b5fahfrn432" path="res://components/random_audio_stream_player_2d.tscn" id="15_g8hcu"]
+[ext_resource type="AudioStream" uid="uid://c0rqx8d16q1e8" path="res://entities/adventurers/sounds/knightattack.wav" id="16_krijn"]
 
 [sub_resource type="Animation" id="Animation_5pvg0"]
 length = 0.001
@@ -128,6 +132,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector2(2, 0), Vector2(0, 0), Vector2(2, 0)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Attack")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v6e3c"]
 resource_name = "death"
@@ -169,6 +187,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Death")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_nmffd"]
@@ -229,6 +261,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [5, 6]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_275hk"]
@@ -373,3 +419,14 @@ texture = ExtResource("3_kxvac")
 hframes = 3
 vframes = 3
 frame = 4
+
+[node name="Footsteps" parent="." instance=ExtResource("13_cn0wl")]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_0emia")
+
+[node name="Attack" parent="." instance=ExtResource("15_g8hcu")]
+stream = ExtResource("16_krijn")
+min_volume_db = -10
+max_volume_db = 0
+random_pitch = true

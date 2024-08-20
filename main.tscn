@@ -1,25 +1,44 @@
-[gd_scene load_steps=9 format=3 uid="uid://q5so6d1cjxcx"]
+[gd_scene load_steps=13 format=3 uid="uid://q5so6d1cjxcx"]
 
 [ext_resource type="PackedScene" uid="uid://dqt37wgynim3e" path="res://entities/necromancer/necromancer.tscn" id="1_6kf73"]
 [ext_resource type="Script" path="res://main.gd" id="1_kq80m"]
 [ext_resource type="Script" path="res://misc/navigation_region_2d.gd" id="1_kyfnk"]
 [ext_resource type="Script" path="res://entities/evil_guy_selection.gd" id="1_yalgq"]
 [ext_resource type="PackedScene" uid="uid://b5qwjq47iqbkj" path="res://entities/skeleton/skeleton.tscn" id="2_nt7cx"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="2_pcw5b"]
 [ext_resource type="PackedScene" uid="uid://c4yxg1d1388ge" path="res://dungeon/rooms/empty_chamber.tscn" id="2_sj438"]
+[ext_resource type="AudioStream" uid="uid://cu71lmkk8bqqg" path="res://assets/music/Dont Let The Boss Hear Us - 8_20_24, 9.15 AM.mp3" id="3_vn1ep"]
+[ext_resource type="AudioStream" uid="uid://4ck325i13txk" path="res://assets/music/Battle Stations! Intro.mp3" id="4_6xhf1"]
 [ext_resource type="PackedScene" uid="uid://c6oi2605fgj2" path="res://ui/ui.tscn" id="5_8w75k"]
+[ext_resource type="AudioStream" uid="uid://c2x42r65pg3ka" path="res://assets/music/Battle Stations!.mp3" id="5_ofl07"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1js82"]
-vertices = PackedVector2Array(41, 41, -41, 41, -41, -41, 41, -41, 2033.37, -1414.57, 2205.62, 1897.95, 65.0781, 9, 65.0312, 7, 64.8672, -11.4531, 65.0781, -39, 64.8672, 36.5391, 65.0312, 55, -65.0781, -55, -64.9609, -39, -65.0781, -39, -64.9609, -23, -65.0781, -23, -64.9609, -7, -65.0781, -7, -64.9609, 9, -65, 9, 25, 65.0781, 41, 64.9609, 41, 65.0938, -1555.78, 1877.03, 64.9062, 9, 64.8984, 7, 64.9062, -39, 64.8984, -41, 65.0469, -41, 64.8594, -67.9375, -1462.19, -1197.4, -64.8594, -67.9375, -64.9375, 25, -65.0781, 25, -65.0703, 64.9375, -55, 64.9375, -55, 65.0781, -36.0234, 64.9375, -7, 64.9375, -7, 65.0781, 11.9766, 64.9375, 25, 64.9375, 64.9062, 64.7969, 64.9062, 55, -64.9531, -55, -64.9375, 43.4062)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9), PackedInt32Array(10, 6, 5, 11), PackedInt32Array(12, 13, 14), PackedInt32Array(14, 15, 16), PackedInt32Array(16, 17, 18), PackedInt32Array(18, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 7, 6), PackedInt32Array(27, 28, 29, 9), PackedInt32Array(4, 9, 29, 30), PackedInt32Array(31, 4, 30, 32), PackedInt32Array(24, 31, 32, 12), PackedInt32Array(20, 33, 34), PackedInt32Array(35, 36, 37, 24), PackedInt32Array(38, 39, 40, 24, 37), PackedInt32Array(41, 42, 21, 24, 40), PackedInt32Array(43, 44, 11, 5), PackedInt32Array(43, 5, 24, 23), PackedInt32Array(32, 45, 12), PackedInt32Array(24, 12, 14), PackedInt32Array(24, 14, 16), PackedInt32Array(24, 16, 18), PackedInt32Array(24, 18, 20, 34), PackedInt32Array(35, 24, 34, 46)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1469, -1204, -1563, 1884, 2213, 1905, 2040, -1422)])
+vertices = PackedVector2Array(25, 25, -25, 25, -25, -25, 25, -25, 2033.34, -1415.22, 2205.62, 1898, 49.0781, 9, 49.0312, 7, 48.8672, -11.4531, 49.0781, -39, 48.9062, 32.0469, 48.9062, 48.7969, -3479.47, 1900.99, 25, 49.0938, -3723.48, -1621.72, -48.8594, -51.9375, -39, 49.0781, -23, 48.9609, -23, 49.0781, -7, 48.9609, -7, 49.0781, 48.9062, 9, 48.8984, 7, -49, -23, -48.9375, -7, -49, -7, -48.9375, 9, -49.0781, 9, -49.0469, -25, -48.9375, -25, -48.9375, -23, -49.0703, 48.9375, -39, 48.9375, 11.9766, 48.9375, 25, 48.9375, 48.9531, -39, 48.8594, -51.9375, -48.9375, 27.4062)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9), PackedInt32Array(10, 6, 5, 11), PackedInt32Array(11, 5, 12, 13), PackedInt32Array(12, 14, 4, 15), PackedInt32Array(16, 17, 18, 12), PackedInt32Array(18, 19, 20, 12), PackedInt32Array(21, 22, 7, 6), PackedInt32Array(23, 24, 25), PackedInt32Array(25, 26, 27), PackedInt32Array(28, 29, 30, 23), PackedInt32Array(31, 32, 16, 12), PackedInt32Array(33, 34, 13, 12, 20), PackedInt32Array(9, 35, 36, 4), PackedInt32Array(37, 31, 12, 27), PackedInt32Array(23, 25, 27, 12, 28), PackedInt32Array(15, 28, 12), PackedInt32Array(15, 4, 36)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3731, -1629, -3486, 1908, 2213, 1905, 2040, -1422)])
 agent_radius = 7.0
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_kq80m")
 
+[node name="UI" parent="." instance=ExtResource("5_8w75k")]
+
+[node name="CalmMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_vn1ep")
+
+[node name="BattleMusicIntro" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_6xhf1")
+
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_ofl07")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
+script = ExtResource("2_pcw5b")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." node_paths=PackedStringArray("empty_chamber")]
 y_sort_enabled = true
@@ -35,15 +54,13 @@ y_sort_enabled = true
 script = ExtResource("1_yalgq")
 
 [node name="Jon" parent="Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(-6, 26)
+position = Vector2(-141, 14)
 
 [node name="John" parent="Entities" instance=ExtResource("2_nt7cx")]
-position = Vector2(15, -3)
+position = Vector2(134, 13)
 
 [node name="Jhan" parent="Entities" instance=ExtResource("2_nt7cx")]
 position = Vector2(-17, -4)
 
 [node name="Necromancer" parent="Entities" instance=ExtResource("1_6kf73")]
-position = Vector2(20, 25)
-
-[node name="UI" parent="." instance=ExtResource("5_8w75k")]
+position = Vector2(-174, 8)

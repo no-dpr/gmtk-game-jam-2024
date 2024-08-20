@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b5qwjq47iqbkj"]
+[gd_scene load_steps=43 format=3 uid="uid://b5qwjq47iqbkj"]
 
 [ext_resource type="Texture2D" uid="uid://dqrtvy7jeb0ko" path="res://entities/skeleton/Skeleton.png" id="1_psw8w"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="1_v25s7"]
@@ -13,6 +13,12 @@
 [ext_resource type="Script" path="res://entities/skeleton/states/move_state.gd" id="9_itqwi"]
 [ext_resource type="Script" path="res://entities/skeleton/states/action_state.gd" id="12_6kgxb"]
 [ext_resource type="Script" path="res://entities/skeleton/states/death_state.gd" id="13_cscfn"]
+[ext_resource type="PackedScene" uid="uid://c2b5fahfrn432" path="res://components/random_audio_stream_player_2d.tscn" id="14_3356o"]
+[ext_resource type="AudioStream" uid="uid://cb3qs0fel778x" path="res://entities/skeleton/sounds/skelesword.wav" id="15_8d3ot"]
+[ext_resource type="AudioStream" uid="uid://biay2v55b13qt" path="res://entities/skeleton/sounds/skelehammer.wav" id="16_l2egq"]
+[ext_resource type="Script" path="res://components/random_audio_stream_player_2d.gd" id="16_syy41"]
+[ext_resource type="AudioStream" uid="uid://c8v2r5mqeie01" path="res://entities/skeleton/sounds/skeledie.wav" id="17_3gif5"]
+[ext_resource type="PackedScene" uid="uid://cbtsp0imxx3f5" path="res://components/footsteps_component.tscn" id="19_cdqxb"]
 
 [sub_resource type="Animation" id="Animation_ij8g1"]
 length = 0.001
@@ -142,6 +148,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Death")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_juxal"]
 resource_name = "hammer-action"
@@ -170,6 +190,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hammer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_rsntw"]
@@ -217,6 +251,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yqlbj"]
 resource_name = "sword-idle"
@@ -262,6 +310,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Headbutt")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_odymd"]
@@ -368,6 +430,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [13, 14]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Footsteps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u61nq"]
@@ -518,3 +594,31 @@ animators = NodePath("../../Animators")
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
 radius = 7.0
+
+[node name="Headbutt" parent="." instance=ExtResource("14_3356o")]
+min_volume_db = -10
+max_volume_db = 0
+random_pitch = true
+
+[node name="Sword" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_8d3ot")
+script = ExtResource("16_syy41")
+min_volume_db = -10
+max_volume_db = 0
+random_pitch = true
+
+[node name="Hammer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_l2egq")
+script = ExtResource("16_syy41")
+min_volume_db = -10
+max_volume_db = 0
+random_pitch = true
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_3gif5")
+script = ExtResource("16_syy41")
+min_volume_db = -10
+max_volume_db = 0
+random_pitch = true
+
+[node name="Footsteps" parent="." instance=ExtResource("19_cdqxb")]

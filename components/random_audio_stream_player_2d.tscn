@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2b5fahfrn432"]
+
+[ext_resource type="AudioStream" uid="uid://11wo8lidc277" path="res://entities/skeleton/sounds/skeleheadbutt.wav" id="1_jrlt0"]
+[ext_resource type="Script" path="res://components/random_audio_stream_player_2d.gd" id="2_tsecj"]
+
+[node name="Headbutt" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_jrlt0")
+script = ExtResource("2_tsecj")

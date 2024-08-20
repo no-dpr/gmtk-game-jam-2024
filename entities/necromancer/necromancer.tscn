@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://dqt37wgynim3e"]
+[gd_scene load_steps=31 format=3 uid="uid://dqt37wgynim3e"]
 
 [ext_resource type="Script" path="res://entities/necromancer/necromancer.gd" id="1_2vlrj"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="2_2ue01"]
 [ext_resource type="Shader" path="res://entities/skeleton/outline.gdshader" id="2_i6yr8"]
 [ext_resource type="Texture2D" uid="uid://bbdt8a2yrw3tp" path="res://entities/necromancer/necromancer.png" id="2_v4bvi"]
+[ext_resource type="PackedScene" uid="uid://ca06ojnihcpkb" path="res://ui/game_over/game_over.tscn" id="2_vpwae"]
 [ext_resource type="PackedScene" uid="uid://cc0qvbu71rgwg" path="res://components/selection_component.tscn" id="3_hi220"]
 [ext_resource type="PackedScene" uid="uid://bitw7wbqakumy" path="res://components/hurtbox_component.tscn" id="5_lw0he"]
 [ext_resource type="Script" path="res://entities/necromancer/revivify_box.gd" id="7_426pk"]
@@ -13,23 +14,10 @@
 [ext_resource type="Script" path="res://entities/necromancer/states/move_state.gd" id="9_4ltx2"]
 [ext_resource type="Script" path="res://entities/necromancer/states/revive_state.gd" id="10_lckoh"]
 [ext_resource type="Script" path="res://entities/necromancer/states/death_state.gd" id="11_1tsm4"]
-
-[sub_resource type="Animation" id="Animation_t3djf"]
-resource_name = "idle"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[ext_resource type="PackedScene" uid="uid://cbtsp0imxx3f5" path="res://components/footsteps_component.tscn" id="15_obkse"]
+[ext_resource type="AudioStream" uid="uid://bx1bsl8ryyi5d" path="res://entities/necromancer/sounds/lichspell.wav" id="16_sc4vx"]
+[ext_resource type="AudioStream" uid="uid://bt3m4emb201bs" path="res://entities/skeleton/reanimation/skeleton_rising.wav" id="17_5j1if"]
+[ext_resource type="AudioStream" uid="uid://clb8r1ntv4qs0" path="res://entities/necromancer/sounds/lichdie.wav" id="17_cjodi"]
 
 [sub_resource type="Animation" id="Animation_k2jyr"]
 length = 0.001
@@ -58,6 +46,139 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_1fksv"]
+resource_name = "death"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"die"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Death")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t3djf"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vumsj"]
+resource_name = "revive"
+length = 3.28
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.1, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RevivifyBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.15, 1.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NecromancerHSM")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.85),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_reviving"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Revive")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Rising")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_mgh3i"]
 resource_name = "walk"
 length = 0.2
@@ -75,64 +196,19 @@ tracks/0/keys = {
 "update": 1,
 "values": [1, 2]
 }
-
-[sub_resource type="Animation" id="Animation_vumsj"]
-resource_name = "revive"
-length = 1.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 5, 0]
-}
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RevivifyBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Footsteps")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NecromancerHSM")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.75),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"finish_reviving"
+"method": &"play_random"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_1fksv"]
-resource_name = "death"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7qbu2"]
@@ -176,6 +252,7 @@ var/reviving/hint_string = ""
 [node name="Necromancer" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hsm") groups=["evil_guys"]]
 collision_layer = 2
 script = ExtResource("1_2vlrj")
+game_over_scene = ExtResource("2_vpwae")
 id = &"necromancer"
 sprite = NodePath("SpriteContainer")
 hsm = NodePath("NecromancerHSM")
@@ -267,3 +344,14 @@ animator = NodePath("../../Animator")
 target_desired_distance = 20.0
 avoidance_enabled = true
 radius = 7.0
+
+[node name="Footsteps" parent="." instance=ExtResource("15_obkse")]
+
+[node name="Revive" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_sc4vx")
+
+[node name="Rising" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_5j1if")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_cjodi")

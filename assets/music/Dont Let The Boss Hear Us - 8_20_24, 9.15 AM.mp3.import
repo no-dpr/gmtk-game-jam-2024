@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cu71lmkk8bqqg"
+path="res://.godot/imported/Dont Let The Boss Hear Us - 8_20_24, 9.15 AM.mp3-32460e3f5a29cfc64f7e264d1540e53d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Dont Let The Boss Hear Us - 8_20_24, 9.15 AM.mp3"
+dest_files=["res://.godot/imported/Dont Let The Boss Hear Us - 8_20_24, 9.15 AM.mp3-32460e3f5a29cfc64f7e264d1540e53d.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

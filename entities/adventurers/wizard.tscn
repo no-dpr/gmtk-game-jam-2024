@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqgov40dspxhs"]
+[gd_scene load_steps=29 format=3 uid="uid://bqgov40dspxhs"]
 
 [ext_resource type="Script" path="res://entities/adventurers/adventurer.gd" id="1_ht0xq"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="2_jmbk5"]
@@ -12,6 +12,10 @@
 [ext_resource type="Script" path="res://entities/adventurers/states/attack_state.gd" id="10_rvkuk"]
 [ext_resource type="Script" path="res://entities/adventurers/states/death_state.gd" id="11_siy83"]
 [ext_resource type="Texture2D" uid="uid://qavkv1yivyje" path="res://entities/adventurers/images/wizard.png" id="12_ok3hs"]
+[ext_resource type="PackedScene" uid="uid://cbtsp0imxx3f5" path="res://components/footsteps_component.tscn" id="13_cxs3y"]
+[ext_resource type="AudioStream" uid="uid://dyiok5pwv1fsj" path="res://entities/adventurers/sounds/wizard_attack.wav" id="14_pepmh"]
+[ext_resource type="AudioStream" uid="uid://cjuceaf4je7na" path="res://entities/adventurers/sounds/deltarune-explosion.mp3" id="15_hxnyk"]
+[ext_resource type="AudioStream" uid="uid://ba2eeplkikikl" path="res://entities/adventurers/sounds/wizdie.wav" id="16_qnemv"]
 
 [sub_resource type="Animation" id="Animation_5pvg0"]
 length = 0.001
@@ -93,6 +97,34 @@ tracks/2/keys = {
 "update": 1,
 "values": [Vector2(-2, 0), Vector2(0, 0)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BuildUp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v6e3c"]
 resource_name = "death"
@@ -121,6 +153,20 @@ tracks/1/keys = {
 "values": [{
 "args": [],
 "method": &"die"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Death")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -158,6 +204,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Footsteps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_275hk"]
@@ -291,3 +351,14 @@ use_parent_material = true
 texture = ExtResource("12_ok3hs")
 hframes = 3
 vframes = 3
+
+[node name="Footsteps" parent="." instance=ExtResource("13_cxs3y")]
+
+[node name="BuildUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_pepmh")
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_hxnyk")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_qnemv")

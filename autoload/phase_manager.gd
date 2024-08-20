@@ -1,5 +1,7 @@
 extends Node
 
+signal phase_changed(build_phase: bool)
+
 var spawners : Array[SpawnComponent] = []
 var build_phase := true
 
@@ -23,7 +25,7 @@ var build_timer: Timer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	build_timer = Timer.new()
-	build_timer.wait_time = 10
+	build_timer.wait_time = 180
 	build_timer.autostart = false
 	build_timer.one_shot = true
 	
@@ -31,13 +33,17 @@ func _ready() -> void:
 	add_child(build_timer)
 
 func start_build_phase() -> void:
-	adventurers_alive = 0
+	_adventurers_alive = 0
 	adventurers_spawned = 0
 	
+	if not build_phase:
+		phase_changed.emit(true)
 	build_phase = true
 	build_timer.start()
 
 func _on_attack_phase() -> void:
+	if build_phase:
+		phase_changed.emit(false)
 	build_phase = false
 	
 	for i : int in adventurers_per_wave:

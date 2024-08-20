@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://o6rjnvcpsesi"]
+[gd_scene load_steps=29 format=3 uid="uid://o6rjnvcpsesi"]
 
 [ext_resource type="Script" path="res://entities/adventurers/adventurer.gd" id="1_0luy7"]
 [ext_resource type="PackedScene" uid="uid://t1gwxahsn6om" path="res://components/health_component.tscn" id="2_whw1p"]
@@ -12,6 +12,10 @@
 [ext_resource type="Script" path="res://entities/adventurers/states/move_state.gd" id="9_xcrm4"]
 [ext_resource type="Script" path="res://entities/adventurers/states/attack_state.gd" id="10_3wtlt"]
 [ext_resource type="Script" path="res://entities/adventurers/states/death_state.gd" id="11_jjaer"]
+[ext_resource type="PackedScene" uid="uid://cbtsp0imxx3f5" path="res://components/footsteps_component.tscn" id="13_in6hd"]
+[ext_resource type="PackedScene" uid="uid://c2b5fahfrn432" path="res://components/random_audio_stream_player_2d.tscn" id="14_hap08"]
+[ext_resource type="AudioStream" uid="uid://mcd5yqcsu76k" path="res://entities/adventurers/sounds/knightdie.wav" id="14_puxyi"]
+[ext_resource type="AudioStream" uid="uid://c0rqx8d16q1e8" path="res://entities/adventurers/sounds/knightattack.wav" id="15_qat0h"]
 
 [sub_resource type="Animation" id="Animation_5pvg0"]
 length = 0.001
@@ -54,6 +58,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_k8so8"]
 resource_name = "attack"
+length = 1.12
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -92,9 +97,24 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Attack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v6e3c"]
 resource_name = "death"
+length = 2.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -127,11 +147,25 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"die"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Death")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -194,6 +228,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [4, 5]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_275hk"]
 _data = {
@@ -234,7 +282,7 @@ hsm = NodePath("AdventurerHSM")
 death_sprite = NodePath("Sprites/Torso")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_whw1p")]
-max_health = 1.0
+max_health = 15.0
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2(1, -9)
@@ -292,6 +340,7 @@ shape = SubResource("CapsuleShape2D_tvo1v")
 [node name="HitboxComponent" parent="." instance=ExtResource("7_s43cr")]
 collision_layer = 2
 collision_mask = 0
+damage = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(8.25, -4)
@@ -334,3 +383,14 @@ animator = NodePath("../../Animator")
 [node name="DeathState" type="LimboState" parent="AdventurerHSM" node_paths=PackedStringArray("animator")]
 script = ExtResource("11_jjaer")
 animator = NodePath("../../Animator")
+
+[node name="Footsteps" parent="." instance=ExtResource("13_in6hd")]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_puxyi")
+
+[node name="Attack" parent="." instance=ExtResource("14_hap08")]
+stream = ExtResource("15_qat0h")
+min_volume_db = -10
+max_volume_db = 0
+random_pitch = true
